@@ -1,6 +1,5 @@
 package com.example.imagesearchapp.screen
 
-import android.media.metrics.Event
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -18,7 +17,6 @@ import com.example.imagesearchapp.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_list) {

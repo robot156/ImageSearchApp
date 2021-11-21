@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.ImageSearchApp.Search"
-        tools:context="com.example.imagesearchapp.screen.DetailFragment">
+        tools:context=".screen.DetailFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
