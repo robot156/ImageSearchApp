@@ -1,0 +1,31 @@
+buildscript {
+
+    ext.hilt_version = '2.38.1'
+
+    ext.lifecycle_version = "2.4.0"
+
+    ext.retrofit_version = "2.9.0"
+
+    ext.moshi_version = "1.8.0"
+
+    ext.glide_version = "4.12.0"
+
+    ext.nav_version = "2.3.5"
+
+    ext.paging_version = "3.0.1"
+
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

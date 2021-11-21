@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.imagesearchapp.screen.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.ImageSearchApp.Search"
+        tools:context=".screen.SearchFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_title"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/ic_unsplash"
+                    app:layout_constraintBottom_toTopOf="@id/et_search"
+                    app:layout_constraintEnd_toEndOf="@id/et_search"
+                    app:layout_constraintStart_toStartOf="@id/et_search"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <com.example.imagesearchapp.util.AutoFocusEditText
+                    android:id="@+id/et_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="35dp"
+                    android:ellipsize="end"
+                    android:focusable="true"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="flagNoExtractUi"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:selectAllOnFocus="true"
+                    android:text="@{viewModel.keyword != null ? viewModel.keyword : ``}"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body0"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/colorGray"
+                    app:layout_constraintBottom_toTopOf="@id/btn_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_title" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_search"
+                    style="@style/Widget.Custom.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:enabled="@{viewModel.enabledInputKeyword}"
+                    android:onClick="@{()-> viewModel.navigateToList(viewModel.keyword)}"
+                    android:text="@string/search_start"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/et_search"
+                    app:layout_constraintStart_toStartOf="@id/et_search"
+                    app:layout_constraintTop_toBottomOf="@id/et_search" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

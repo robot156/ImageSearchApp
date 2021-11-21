@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="isLoading"
+            type="boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.ImageSearchApp.Search">
+        <ProgressBar
+            android:id="@+id/pb_img_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_state_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/list_error"
+            android:visibility="@{!isLoading ? View.VISIBLE : View.GONE}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/pb_img_load"
+            tools:text="이미지를 조회할 수 없습니다." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_retry"
+            style="@style/Widget.Custom.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{!isLoading ? View.VISIBLE : View.GONE}"
+            android:layout_marginTop="10dp"
+            android:text="@string/list_retry"
+            android:layout_marginBottom="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tv_state_error"
+            app:layout_constraintStart_toStartOf="@id/tv_state_error"
+            app:layout_constraintTop_toBottomOf="@id/tv_state_error" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

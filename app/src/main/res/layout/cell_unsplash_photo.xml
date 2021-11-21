@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.imagesearchapp.screen.ListViewModel" />
+
+        <variable
+            name="photoData"
+            type="com.example.imagesearchapp.data.model.UnsplashPhoto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{()-> viewModel.navigateToDetail(photoData)}"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{photoData.urls.regular}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/doge" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/gradient"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:drawablePadding="4dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="@{photoData.user.name}"
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/ic_user"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="userName" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
