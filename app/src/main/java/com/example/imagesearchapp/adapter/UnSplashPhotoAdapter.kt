@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.example.imagesearchapp.adapter.viewholder.UnSplashPhotoViewHolder
 import com.example.imagesearchapp.data.model.UnsplashPhoto
 import com.example.imagesearchapp.databinding.CellUnsplashPhotoBinding
 import com.example.imagesearchapp.screen.ListViewModel

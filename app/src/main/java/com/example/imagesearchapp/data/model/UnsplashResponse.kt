@@ -5,5 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UnsplashResponse(
+
     val results: List<UnsplashPhoto>
 ) : Parcelable

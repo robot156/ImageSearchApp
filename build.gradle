@@ -12,12 +12,18 @@ buildscript {
 
     ext.paging_version = "3.0.1"
 
+    ext.timber_version = "5.0.1"
+
+    ext.toasty_version = "1.5.2"
+
+    ext.permission_version = "3.0.0"
+
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath "com.android.tools.build:gradle:7.0.3"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"

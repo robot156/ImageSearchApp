@@ -7,16 +7,19 @@
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.22236842105263158" />
         <entry key="app/src/main/res/drawable/ic_image_not.xml" value="0.2894736842105263" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2894736842105263" />
+        <entry key="app/src/main/res/drawable/ic_save.xml" value="0.32001682085786376" />
         <entry key="app/src/main/res/drawable/ic_unsplash.xml" value="0.3787037037037037" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/drawable/selecter_button.xml" value="0.346782431052094" />
+        <entry key="app/src/main/res/drawable/shape.xml" value="0.32001682085786376" />
         <entry key="app/src/main/res/font/font.xml" value="0.3787037037037037" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.22902797650497275" />
         <entry key="app/src/main/res/layout/cell_unsplash_footer.xml" value="0.2873758542974711" />
         <entry key="app/src/main/res/layout/cell_unsplash_photo.xml" value="0.32083333333333336" />
-        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.29037271233043077" />
-        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.3701181190896807" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2659229571778517" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2828810535001108" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3283002588438309" />
       </map>
     </option>
   </component>

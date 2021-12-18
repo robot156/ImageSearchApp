@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:theme="@style/Theme.ImageSearchApp.Search"
-        tools:context=".screen.SearchFragment">
+        tools:context=".screen.SearchFragment"
+        tools:theme="@style/Theme.ImageSearchApp.Search">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nsv_search"
@@ -24,11 +24,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <ImageView
                     android:id="@+id/iv_title"

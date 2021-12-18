@@ -4,9 +4,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
+import com.example.imagesearchapp.adapter.viewholder.UnSplashPhotoLoadViewHolder
 import com.example.imagesearchapp.databinding.CellUnsplashFooterBinding
 
-class UnSplashPhotoLoadAdapter(private val retry: () -> Unit) : LoadStateAdapter<UnSplashPhotoLoadViewHolder>() {
+class UnSplashPhotoLoadAdapter(
+    private val retry: () -> Unit
+) : LoadStateAdapter<UnSplashPhotoLoadViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): UnSplashPhotoLoadViewHolder {
         val inflater = LayoutInflater.from(parent.context)

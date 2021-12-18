@@ -7,4 +7,11 @@
     <string name="list_retry">새로고침</string>
 
     <string name="detail_user">create by %s</string>
+    <string name="detail_save">저장하기</string>
+    <string name="detail_success">저장성공</string>
+    <string name="detail_fail">저장실패</string>
+    <string name="detail_cancel">취소</string>
+    <string name="detail_confirm">확인</string>
+    <string name="detail_permission">권한 설정</string>
+    <string name="detail_storage_description">저장공간 접근 권한이 필요합니다. 휴대폰 설정 > 앱에서 저장공간 권한을 허용으로 변경해주세요.</string>
 </resources>

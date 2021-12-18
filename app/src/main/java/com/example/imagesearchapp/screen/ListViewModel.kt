@@ -8,7 +8,9 @@ import com.example.imagesearchapp.domain.UnSplashRepository
 import com.example.imagesearchapp.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.distinctUntilChanged
+import timber.log.Timber
 
 import javax.inject.Inject
 
@@ -20,14 +22,17 @@ class ListViewModel @Inject constructor(
 
     val keyword = savedStateHandle.get<String>(KEY_KEYWORD) ?: ""
 
-    val photos: Flow<PagingData<UnsplashPhoto>> = repository.getSearchResults(keyword).distinctUntilChanged().cachedIn(viewModelScope)
+    val photos: Flow<PagingData<UnsplashPhoto>> = repository
+        .getSearchResults(keyword)
+        .distinctUntilChanged()
+        .cachedIn(viewModelScope)
 
     private val _clickRefresh = MutableLiveData<Event<Unit>>()
     val clickRefresh: LiveData<Event<Unit>>
         get() = _clickRefresh
 
     private val _navigateToDetail = MutableLiveData<Event<UnsplashPhoto>>()
-    val navigateToDetail : LiveData<Event<UnsplashPhoto>>
+    val navigateToDetail: LiveData<Event<UnsplashPhoto>>
         get() = _navigateToDetail
 
     fun clickRefresh() {

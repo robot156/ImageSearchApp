@@ -23,9 +23,7 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
 
     private val listViewModel: ListViewModel by viewModels()
 
-    private val listAdapter by lazy {
-        UnSplashPhotoAdapter(viewLifecycleOwner, listViewModel)
-    }
+    private val listAdapter by lazy { UnSplashPhotoAdapter(viewLifecycleOwner, listViewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +60,7 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
     }
 
     private fun initObserver() {
-        lifecycleScope.launch {
+        lifecycleScope.launchWhenCreated {
             listViewModel.photos.collectLatest {
                 listAdapter.submitData(it)
             }
