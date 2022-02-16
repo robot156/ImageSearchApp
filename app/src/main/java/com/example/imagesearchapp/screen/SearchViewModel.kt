@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
         savedStateHandle.set(KEY_KEYWORD, keyword)
     }
 
-    fun navigateToList(keyword: String?) {
+    fun navigateToList(keyword: String?) { // 리스트 화면으로 이동
         _navigateToDetail.value = Event(keyword!!)
     }
 

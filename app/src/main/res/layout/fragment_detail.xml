@@ -93,13 +93,12 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:gravity="end"
-                    app:layout_constraintVertical_chainStyle="spread_inside"
-                    app:layout_constraintBottom_toTopOf="@id/btn_save"
                     android:text="@{@string/detail_user(viewModel.unsplashPhoto.user.name)}"
                     android:textAppearance="@style/TextAppearance.imgSearch.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
                     tools:text="작성자명이 들어가는 텍스트" />
 
                 <com.google.android.material.button.MaterialButton
@@ -113,9 +112,12 @@
                     android:onClick="@{()-> viewModel.saveToAlbum()}"
                     android:paddingHorizontal="40dp"
                     android:text="@string/detail_save"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_create_user" />
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_user"
+                    app:layout_constraintVertical_bias="0"
+                    app:layout_constraintVertical_weight="0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

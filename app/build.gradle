@@ -70,7 +70,7 @@ dependencies {
 
     /** network */
     // 로깅 인터셉터
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
     // 레트로핏
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     // GSON 컨버터

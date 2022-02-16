@@ -17,10 +17,10 @@ class UnSplashRepositoryImpl @Inject constructor(
     override fun getSearchResults(query: String): Flow<PagingData<UnsplashPhoto>> =
         Pager(
             config = PagingConfig(
-                pageSize = 20,
-                maxSize = 100,
+                pageSize = 4,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { UnsplashPagingSource(unsplashApi, query) }
+            pagingSourceFactory = {
+                UnsplashPagingSource(unsplashApi, query) }
         ).flow
 }

@@ -7,11 +7,7 @@ import com.example.imagesearchapp.data.model.UnsplashPhoto
 import com.example.imagesearchapp.domain.UnSplashRepository
 import com.example.imagesearchapp.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.distinctUntilChanged
-import timber.log.Timber
-
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
