@@ -1,21 +1,29 @@
 buildscript {
 
-    ext.hilt_version = '2.38.1'
+    ext.kotlin_version = '1.7.10'
 
-    ext.lifecycle_version = "2.4.0"
+    ext.kotlin_retrofit_converter_version = '0.8.0'
+
+    ext.kotlin_serialization_json_version ="1.4.0-RC"
+
+    ext.hilt_version = '2.42'
+
+    ext.lifecycle_version = "2.5.0"
 
     ext.retrofit_version = "2.9.0"
 
-    ext.glide_version = "4.12.0"
+    ext.logging_interceptor_version ="4.9.3"
 
-    ext.nav_version = "2.3.5"
+    ext.glide_version = "4.13.2"
 
-    ext.paging_version = "3.0.1"
+    ext.nav_version = "2.5.0"
+
+    ext.paging_version = "3.1.1"
 
     ext.timber_version = "5.0.1"
 
     ext.toasty_version = "1.5.2"
-
+    
     ext.permission_version = "3.0.0"
 
     repositories {
@@ -23,8 +31,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.3"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31"
+        classpath "com.android.tools.build:gradle:7.0.4"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }

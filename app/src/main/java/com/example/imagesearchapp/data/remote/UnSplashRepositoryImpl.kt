@@ -4,7 +4,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.imagesearchapp.data.model.UnsplashPhoto
-import com.example.imagesearchapp.data.model.UnsplashResponse
 import com.example.imagesearchapp.domain.UnSplashRepository
 import com.example.imagesearchapp.service.ServiceApi
 import kotlinx.coroutines.flow.Flow
@@ -17,10 +16,11 @@ class UnSplashRepositoryImpl @Inject constructor(
     override fun getSearchResults(query: String): Flow<PagingData<UnsplashPhoto>> =
         Pager(
             config = PagingConfig(
-                pageSize = 4,
+                pageSize = 50,
                 enablePlaceholders = false
             ),
             pagingSourceFactory = {
-                UnsplashPagingSource(unsplashApi, query) }
+                UnsplashPagingSource(unsplashApi, query)
+            }
         ).flow
 }

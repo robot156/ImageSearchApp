@@ -3,6 +3,7 @@
 
     <string name="search_hint">찾으시는 이미지를 검색해보세요.</string>
     <string name="search_start">검색하기</string>
+
     <string name="list_error">이미지를 조회할 수 없습니다.</string>
     <string name="list_retry">새로고침</string>
 

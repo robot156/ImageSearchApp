@@ -2,14 +2,16 @@ package com.example.imagesearchapp.di
 
 import com.example.imagesearchapp.service.API
 import com.example.imagesearchapp.service.ServiceApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -18,7 +20,7 @@ import javax.inject.Singleton
 object ServiceModule {
 
     @Provides
-    fun providerHttpLoggingInterceptor() : HttpLoggingInterceptor {
+    fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
             .apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -42,9 +44,12 @@ object ServiceModule {
     fun provideRetrofit(
         okHttpClient: OkHttpClient
     ): ServiceApi {
+        val format = Json { ignoreUnknownKeys = true }
+        val contentType = "application/json".toMediaType()
+
         return Retrofit.Builder()
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(format.asConverterFactory(contentType))
             .baseUrl(API.BASE_URL)
             .build()
             .create(ServiceApi::class.java)
