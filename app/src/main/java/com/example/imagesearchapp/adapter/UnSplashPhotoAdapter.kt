@@ -2,7 +2,7 @@ package com.example.imagesearchapp.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.imagesearchapp.adapter.viewholder.UnSplashPhotoViewHolder
@@ -11,7 +11,6 @@ import com.example.imagesearchapp.databinding.CellUnsplashPhotoBinding
 import com.example.imagesearchapp.screen.ListViewModel
 
 class UnSplashPhotoAdapter(
-    private val adapterLifecycleOwner: LifecycleOwner,
     private val listViewModel: ListViewModel
 ) : PagingDataAdapter<UnsplashPhoto, UnSplashPhotoViewHolder>(PHOTO_COMPARATOR) {
 
@@ -34,7 +33,7 @@ class UnSplashPhotoAdapter(
         getItem(position)?.let {
             holderUnSplash.binding.apply {
                 photoData = it
-                lifecycleOwner = adapterLifecycleOwner
+                lifecycleOwner = holderUnSplash.itemView.findViewTreeLifecycleOwner()
                 viewModel = listViewModel
                 executePendingBindings()
             }

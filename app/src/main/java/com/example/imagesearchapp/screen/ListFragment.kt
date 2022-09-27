@@ -16,14 +16,13 @@ import com.example.imagesearchapp.util.EventObserver
 import com.example.imagesearchapp.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_list) {
 
     private val listViewModel: ListViewModel by viewModels()
 
-    private val listAdapter by lazy { UnSplashPhotoAdapter(viewLifecycleOwner, listViewModel) }
+    private val listAdapter by lazy { UnSplashPhotoAdapter(listViewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

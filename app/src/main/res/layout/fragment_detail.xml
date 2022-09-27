@@ -39,7 +39,7 @@
                     android:text="@{viewModel.keyword}"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     tools:text="doge" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -70,7 +70,8 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:layout_height="300dp"
-                    tools:src="@drawable/doge" />
+                    tools:scaleType="centerCrop"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
                 <TextView
                     android:id="@+id/tv_description"

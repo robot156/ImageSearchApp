@@ -53,7 +53,7 @@
                     android:text="@{viewModel.keyword}"
                     android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
-                    android:textColor="@color/white"
+                    android:textColor="@android:color/white"
                     tools:text="doge" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>

@@ -10,6 +10,7 @@
         android:name="com.example.imagesearchapp.screen.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search">
+
         <action
             android:id="@+id/action_searchFragment_to_listFragment"
             app:destination="@id/listFragment"

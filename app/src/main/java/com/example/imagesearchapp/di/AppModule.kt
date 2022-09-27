@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.imagesearchapp.data.file.FileLocalDataSource
 import com.example.imagesearchapp.data.file.FileLocalDataSourceImpl
 import com.example.imagesearchapp.data.file.FileUtil
-import com.example.imagesearchapp.data.remote.FileSaveRepositoryImpl
+import com.example.imagesearchapp.data.local.FileSaveRepositoryImpl
 import com.example.imagesearchapp.data.remote.UnSplashRepositoryImpl
 import com.example.imagesearchapp.domain.FileSaveRepository
 import com.example.imagesearchapp.domain.UnSplashRepository

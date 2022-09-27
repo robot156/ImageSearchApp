@@ -12,7 +12,6 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.Exception
 import javax.inject.Inject
 
 class FileUtil @Inject constructor(

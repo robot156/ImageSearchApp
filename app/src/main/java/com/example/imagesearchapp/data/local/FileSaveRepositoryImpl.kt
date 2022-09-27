@@ -1,4 +1,4 @@
-package com.example.imagesearchapp.data.remote
+package com.example.imagesearchapp.data.local
 
 import com.example.imagesearchapp.data.file.FileLocalDataSource
 import com.example.imagesearchapp.domain.FileSaveRepository

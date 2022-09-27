@@ -29,7 +29,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/doge" />
+            tools:src="@tools:sample/avatars" />
 
         <View
             android:layout_width="0dp"
@@ -48,7 +48,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:text="@{photoData.user.name}"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             app:drawableStartCompat="@drawable/ic_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
