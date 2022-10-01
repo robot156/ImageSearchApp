@@ -8,6 +8,18 @@
         <import type="android.view.View" />
 
         <variable
+            name="isLoading"
+            type="boolean" />
+
+        <variable
+            name="isError"
+            type="boolean" />
+
+        <variable
+            name="isSuccess"
+            type="boolean" />
+
+        <variable
             name="viewModel"
             type="com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModel" />
     </data>
@@ -47,6 +59,7 @@
             android:id="@+id/rv_keep_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:visibility="@{isSuccess ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +67,17 @@
             tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             tools:listitem="@layout/cell_unsplash_keep_photo"
             tools:spanCount="3" />
+
+        <ProgressBar
+            android:id="@+id/pb_rv_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_empty_storage"
@@ -63,7 +87,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar">
+            app:layout_constraintTop_toBottomOf="@id/appbar"
+            tools:visibility="gone">
 
             <FrameLayout
                 android:id="@+id/fl_empty_icon"

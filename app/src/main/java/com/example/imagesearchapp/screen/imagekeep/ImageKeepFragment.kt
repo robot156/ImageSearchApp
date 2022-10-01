@@ -15,6 +15,7 @@ import com.example.imagesearchapp.util.EventObserver
 import com.example.imagesearchapp.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -68,9 +69,18 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
             }
 
             launch {
-                unsplashKeepPhotoAdapter.loadStateFlow.collect { loadState ->
-                    imageKeepViewModel.setKeepImageEmpty((loadState.refresh is LoadState.NotLoading && unsplashKeepPhotoAdapter.itemCount == 0))
-                }
+                unsplashKeepPhotoAdapter
+                    .loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .collect { loadState ->
+                        with(dataBinding) {
+                            isSuccess = loadState.source.refresh is LoadState.NotLoading
+                            isLoading =loadState.source.refresh is LoadState.Loading
+                            isError = loadState.source.refresh is LoadState.Error // error 면 true
+                        }
+
+                        imageKeepViewModel.setKeepImageEmpty((loadState.refresh is LoadState.NotLoading && unsplashKeepPhotoAdapter.itemCount == 0))
+                    }
             }
         }
 
