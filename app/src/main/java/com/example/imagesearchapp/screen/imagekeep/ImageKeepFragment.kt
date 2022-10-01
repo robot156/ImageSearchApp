@@ -16,7 +16,6 @@ import com.example.imagesearchapp.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @AndroidEntryPoint
 class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout.fragment_image_keep) {
