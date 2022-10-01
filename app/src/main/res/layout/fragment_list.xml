@@ -27,8 +27,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:theme="@style/Theme.ImageSearchApp.Search"
-        tools:context=".screen.ListFragment">
+        tools:context=".screen.ListFragment"
+        tools:theme="@style/Theme.ImageSearchApp.Search">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -51,7 +51,6 @@
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="30dp"
                     android:text="@{viewModel.keyword}"
-                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
                     android:textColor="@android:color/white"
                     tools:text="doge" />

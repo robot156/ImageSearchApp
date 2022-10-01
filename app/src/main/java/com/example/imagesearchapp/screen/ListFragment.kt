@@ -9,8 +9,8 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.imagesearchapp.DataBindingFragment
 import com.example.imagesearchapp.R
-import com.example.imagesearchapp.adapter.UnSplashPhotoAdapter
-import com.example.imagesearchapp.adapter.UnSplashPhotoLoadAdapter
+import com.example.imagesearchapp.adapter.UnsplashPhotoAdapter
+import com.example.imagesearchapp.adapter.UnsplashPhotoLoadAdapter
 import com.example.imagesearchapp.databinding.FragmentListBinding
 import com.example.imagesearchapp.util.EventObserver
 import com.example.imagesearchapp.util.safeNavigate
@@ -22,14 +22,14 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
 
     private val listViewModel: ListViewModel by viewModels()
 
-    private val listAdapter by lazy { UnSplashPhotoAdapter(listViewModel) }
+    private val unsplashPhotoAdapter by lazy { UnsplashPhotoAdapter(listViewModel) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         dataBinding.apply {
-            viewModel = listViewModel
             lifecycleOwner = viewLifecycleOwner
+            viewModel = listViewModel
         }
 
         initView()
@@ -41,9 +41,9 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
         dataBinding.rvPhoto.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
-            adapter = listAdapter.withLoadStateHeaderAndFooter(
-                header = UnSplashPhotoLoadAdapter { listAdapter.retry() },
-                footer = UnSplashPhotoLoadAdapter { listAdapter.retry() }
+            adapter = unsplashPhotoAdapter.withLoadStateHeaderAndFooter(
+                header = UnsplashPhotoLoadAdapter { unsplashPhotoAdapter.retry() },
+                footer = UnsplashPhotoLoadAdapter { unsplashPhotoAdapter.retry() }
             )
         }
     }
@@ -61,19 +61,19 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
     private fun initObserver() {
         lifecycleScope.launchWhenCreated {
             listViewModel.photos.collectLatest {
-                listAdapter.submitData(it)
+                unsplashPhotoAdapter.submitData(it)
             }
         }
 
         listViewModel.clickRefresh.observe(viewLifecycleOwner, EventObserver {
-            listAdapter.retry()
+            unsplashPhotoAdapter.retry()
         })
 
         listViewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
             findNavController().safeNavigate(ListFragmentDirections.actionListFragmentToDetailFragment(listViewModel.keyword, it))
         })
 
-        listAdapter.addLoadStateListener { loadState ->
+        unsplashPhotoAdapter.addLoadStateListener { loadState ->
             dataBinding.apply {
                 isSuccess = loadState.source.refresh is LoadState.NotLoading
                 isLoading = loadState.source.refresh is LoadState.Loading

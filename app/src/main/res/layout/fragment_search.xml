@@ -30,8 +30,25 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true">
+                android:focusable="true">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Custom.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="35dp"
+                    app:icon="@drawable/ic_keep_selected"
+                    app:iconTint="@color/color_light_pink"
+                    app:layout_constraintBottom_toTopOf="@id/iv_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    app:onSingleClick="@{()-> viewModel.navigateToStorage()}"
+                    app:strokeColor="@color/color_light_pink"
+                    app:strokeWidth="1dp" />
 
                 <ImageView
                     android:id="@+id/iv_title"

@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import com.example.imagesearchapp.data.model.UnsplashPhoto
 import kotlinx.coroutines.flow.Flow
 
-interface UnSplashRepository {
+interface UnsplashRemoteRepository {
+
     fun getSearchResults(query : String) : Flow<PagingData<UnsplashPhoto>>
 }

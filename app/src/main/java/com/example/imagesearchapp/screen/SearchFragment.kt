@@ -31,7 +31,7 @@ class SearchFragment : DataBindingFragment<FragmentSearchBinding>(R.layout.fragm
         super.onViewCreated(view, savedInstanceState)
 
         dataBinding.apply {
-            lifecycleOwner = this@SearchFragment
+            lifecycleOwner = viewLifecycleOwner
             viewModel = searchViewModel
         }
 
@@ -55,6 +55,10 @@ class SearchFragment : DataBindingFragment<FragmentSearchBinding>(R.layout.fragm
                     findNavController().safeNavigate(SearchFragmentDirections.actionSearchFragmentToListFragment(keyword))
                 }
             }
+        })
+
+        searchViewModel.navigateToStorage.observe(viewLifecycleOwner, EventObserver {
+            findNavController().safeNavigate(SearchFragmentDirections.actionSearchFragmentToImageKeepFragment())
         })
     }
 

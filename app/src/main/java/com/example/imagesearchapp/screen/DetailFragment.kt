@@ -6,8 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.DataBindingFragment
 import com.example.imagesearchapp.R
@@ -39,10 +39,12 @@ class DetailFragment : DataBindingFragment<FragmentDetailBinding>(R.layout.fragm
     }
 
     private fun initListener() {
-        dataBinding.toolbar.apply {
-            setNavigationOnClickListener {
-                if (!findNavController().navigateUp()) {
-                    requireActivity().finish()
+        with(dataBinding) {
+            toolbar.apply {
+                setNavigationOnClickListener {
+                    if (!findNavController().navigateUp()) {
+                        requireActivity().finish()
+                    }
                 }
             }
         }
@@ -60,21 +62,27 @@ class DetailFragment : DataBindingFragment<FragmentDetailBinding>(R.layout.fragm
         detailViewModel.saveFail.observe(viewLifecycleOwner, EventObserver {
             Toasty.error(requireContext(), resources.getString(R.string.detail_fail), Toasty.LENGTH_SHORT, false).show()
         })
+
+        detailViewModel.isLoading.observe(viewLifecycleOwner, Observer {
+            if (it) showLoadingDialog() else hideLoadingDialog()
+        })
     }
 
     @AfterPermissionGranted(STORAGE_PERMISSION_REQUEST_CODE)
     private fun requestStoragePermission() {
         if (EasyPermissions.hasPermissions(requireContext(), *STORAGE_PERMISSION)) {
-
             val byteArray = dataBinding.ivPhoto.let { view ->
                 createByteArrayFromView(view, view.width, view.height)
             }
 
-            detailViewModel.imageSave(
-                byteArray = byteArray,
-                imagePath = requireContext().cacheDir.path + File.separator + "image",
-                fileName = "IMG_${System.currentTimeMillis()}.png"
-            )
+            detailViewModel.apply {
+                setLoading(true)
+                imageSave(
+                    byteArray = byteArray,
+                    imagePath = requireContext().cacheDir.path + File.separator + "image",
+                    fileName = "IMG_${System.currentTimeMillis()}.png"
+                )
+            }
         } else {
             EasyPermissions.requestPermissions(
                 this,

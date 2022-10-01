@@ -35,7 +35,14 @@
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:textAppearance">@style/TextAppearance.imgSearch.HeadLine2</item>
-        <item name="backgroundTint">@color/selecter_button</item>
+        <item name="backgroundTint">@color/selected_button</item>
         <item name="android:textColor">@color/selecter_button_text</item>
+    </style>
+
+    <style name="Widget.Custom.IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="iconTint">@color/colorPrimary</item>
     </style>
 </resources>

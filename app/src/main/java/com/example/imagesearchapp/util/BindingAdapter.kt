@@ -2,10 +2,20 @@ package com.example.imagesearchapp.util
 
 import android.app.Activity
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.imagesearchapp.R
+
+@BindingAdapter("onSingleClick")
+fun bindOnSingleClick(view: View, onClickListener: View.OnClickListener) {
+    view.setOnClickListener(object : OnSingleClickListener() {
+        override fun onSingleClick(v: View) {
+            onClickListener.onClick(v)
+        }
+    })
+}
 
 @BindingAdapter("imageUrl")
 fun loadImage(view: ImageView, imageUrl: String?) {
@@ -18,6 +28,15 @@ fun loadImage(view: ImageView, imageUrl: String?) {
             .placeholder(android.R.color.white)
             .error(R.drawable.ic_image_not)
             .into(view)
+    }
+}
+
+@BindingAdapter("isGone")
+fun bindIsGone(view: View, isGone: Boolean?) {
+    if (isGone == null || isGone) {
+        view.visibility = View.GONE
+    } else {
+        view.visibility = View.VISIBLE
     }
 }
 

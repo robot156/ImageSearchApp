@@ -10,8 +10,8 @@
             type="com.example.imagesearchapp.screen.ListViewModel" />
 
         <variable
-            name="photoData"
-            type="com.example.imagesearchapp.data.model.UnsplashPhoto" />
+            name="photo"
+            type="com.example.imagesearchapp.data.model.UnsplashPhotoItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,9 +22,9 @@
             android:id="@+id/iv_photo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:onClick="@{()-> viewModel.navigateToDetail(photoData)}"
+            android:onClick="@{()-> viewModel.navigateToDetail(photo)}"
             android:scaleType="centerCrop"
-            app:imageUrl="@{photoData.urls.regular}"
+            app:imageUrl="@{photo.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:drawablePadding="4dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:text="@{photoData.user.name}"
+            android:text="@{photo.userName}"
             android:textColor="@android:color/white"
             app:drawableStartCompat="@drawable/ic_user"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -22,6 +22,10 @@ class SearchViewModel @Inject constructor(
     val navigateToDetail: LiveData<Event<String>>
         get() = _navigateToDetail
 
+    private val _navigateToStorage = MutableLiveData<Event<Unit>>()
+    val navigateToStorage: LiveData<Event<Unit>>
+        get() = _navigateToStorage
+
     init {
         with(_enabledInputKeyword) {
             addSource(keyword) {
@@ -39,8 +43,12 @@ class SearchViewModel @Inject constructor(
         savedStateHandle.set(KEY_KEYWORD, keyword)
     }
 
-    fun navigateToList(keyword: String?) { // 리스트 화면으로 이동
+    fun navigateToList(keyword: String?) {
         _navigateToDetail.value = Event(keyword!!)
+    }
+
+    fun navigateToStorage() {
+        _navigateToStorage.value = Event(Unit)
     }
 
     companion object {

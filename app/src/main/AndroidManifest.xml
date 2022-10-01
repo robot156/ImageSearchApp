@@ -15,6 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ImageSearchApp.Search"
         android:windowSoftInputMode="adjustPan|stateHidden">
+
         <activity
             android:name=".screen.MainActivity"
             android:exported="true">

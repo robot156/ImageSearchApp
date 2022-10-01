@@ -1,8 +1,10 @@
 package com.example.imagesearchapp.util
 
 import android.content.Context
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions

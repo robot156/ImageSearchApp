@@ -15,4 +15,10 @@
     <string name="detail_confirm">확인</string>
     <string name="detail_permission">권한 설정</string>
     <string name="detail_storage_description">저장공간 접근 권한이 필요합니다. 휴대폰 설정 > 앱에서 저장공간 권한을 허용으로 변경해주세요.</string>
+
+    <string name="image_keep_title">보관함</string>
+    <string name="image_keep">보관하기</string>
+    <string name="image_keep_empty">아직 보관된 이미지가 없습니다</string>
+
+
 </resources>

@@ -2,7 +2,10 @@ package com.example.imagesearchapp.screen
 
 import androidx.lifecycle.*
 import com.example.imagesearchapp.data.model.UnsplashPhoto
+import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 import com.example.imagesearchapp.domain.FileSaveRepository
+import com.example.imagesearchapp.domain.UnsplashLocalRepository
+import com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModelDelegate
 import com.example.imagesearchapp.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -10,12 +13,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
-    private val fileSaveRepository: FileSaveRepository
-) : ViewModel() {
+    savedStateHandle: SavedStateHandle,
+    private val fileSaveRepository: FileSaveRepository,
+    private val unSplashLocalRepository: UnsplashLocalRepository,
+    imageKeepViewModelDelegate: ImageKeepViewModelDelegate
+) : ViewModel(), ImageKeepViewModelDelegate by imageKeepViewModelDelegate {
 
-    val keyword = savedStateHandle.get<String>(KEY_KEYWORD)
-    val unsplashPhoto = savedStateHandle.get<UnsplashPhoto>(KEY_PHOTO_DATA)
+    val keyword = savedStateHandle.get<String?>(KEY_KEYWORD)
+    val unsplashPhoto = savedStateHandle.get<UnsplashPhotoItem>(KEY_PHOTO_DATA)
+
+    private val _isKeepImage = MutableLiveData<Boolean>(false)
+    val isKeepImage: LiveData<Boolean>
+        get() = _isKeepImage
 
     private val _saveToAlbum = MutableLiveData<Event<Unit>>()
     val saveToAlbum: LiveData<Event<Unit>>
@@ -28,6 +37,36 @@ class DetailViewModel @Inject constructor(
     private val _saveFail = MutableLiveData<Event<Unit>>()
     val saveFail: LiveData<Event<Unit>>
         get() = _saveFail
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    init {
+        viewModelScope.launch {
+            launch {
+                _isKeepImage.value = unsplashPhoto
+                    ?.let {
+                        unSplashLocalRepository.getUnSplash(imageId = it.id) != null
+                    } ?: false
+            }
+        }
+    }
+
+    fun setImageKeep(unsplashPhoto: UnsplashPhotoItem?) {
+        viewModelScope.launch {
+            unsplashPhoto?.let {
+                if (isKeepImage.value == false) {
+                    unSplashLocalRepository.setUnSplash(it)
+                } else {
+                    unSplashLocalRepository.deleteUnSplashPhoto(it.id)
+                    deleteUnsplashPhoto(it)
+                }
+
+                _isKeepImage.value = !(isKeepImage.value ?: true)
+            }
+        }
+    }
 
     fun saveToAlbum() {
         _saveToAlbum.value = Event(Unit)
@@ -45,8 +84,14 @@ class DetailViewModel @Inject constructor(
                 } else {
                     _saveComplete.value = Event(Unit)
                 }
+
+                setLoading(false)
             }
         }
+    }
+
+    fun setLoading(isLoading: Boolean) {
+        _isLoading.value = isLoading
     }
 
     companion object {

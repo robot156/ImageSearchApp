@@ -4,19 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import com.example.imagesearchapp.adapter.viewholder.UnSplashPhotoLoadViewHolder
+import com.example.imagesearchapp.adapter.viewholder.UnsplashPhotoLoadViewHolder
 import com.example.imagesearchapp.databinding.CellUnsplashFooterBinding
 
-class UnSplashPhotoLoadAdapter(
+class UnsplashPhotoLoadAdapter(
     private val retry: () -> Unit
-) : LoadStateAdapter<UnSplashPhotoLoadViewHolder>() {
+) : LoadStateAdapter<UnsplashPhotoLoadViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): UnSplashPhotoLoadViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): UnsplashPhotoLoadViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        return UnSplashPhotoLoadViewHolder(CellUnsplashFooterBinding.inflate(inflater, parent, false))
+        return UnsplashPhotoLoadViewHolder(CellUnsplashFooterBinding.inflate(inflater, parent, false))
     }
 
-    override fun onBindViewHolder(holder: UnSplashPhotoLoadViewHolder, loadState: LoadState) {
+    override fun onBindViewHolder(holder: UnsplashPhotoLoadViewHolder, loadState: LoadState) {
         holder.binding.apply {
             isLoading = loadState is LoadState.Loading
             btnRetry.setOnClickListener {

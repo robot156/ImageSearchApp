@@ -34,10 +34,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_gravity="end"
                     android:layout_marginHorizontal="30dp"
                     android:text="@{viewModel.keyword}"
-                    android:textAllCaps="true"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
                     android:textColor="@android:color/white"
                     tools:text="doge" />
@@ -58,14 +57,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_photo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:scaleType="fitCenter"
-                    app:imageUrl="@{viewModel.unsplashPhoto.urls.regular}"
-                    app:layout_constraintBottom_toTopOf="@id/tv_description"
+                    app:imageUrl="@{viewModel.unsplashPhoto.imageUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -79,9 +77,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="2dp"
-                    android:text="@{viewModel.unsplashPhoto.description}"
+                    android:text="@{viewModel.unsplashPhoto.imageDescription}"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
                     android:textColor="@android:color/black"
+                    app:isGone="@{viewModel.unsplashPhoto.imageDescription == null}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_photo"
@@ -94,7 +93,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:layout_marginTop="5dp"
                     android:gravity="end"
-                    android:text="@{@string/detail_user(viewModel.unsplashPhoto.user.name)}"
+                    android:text="@{@string/detail_user(viewModel.unsplashPhoto.userName)}"
                     android:textAppearance="@style/TextAppearance.imgSearch.Body1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -109,16 +108,41 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="35dp"
                     android:layout_marginBottom="15dp"
-                    android:drawableLeft="@drawable/ic_save"
                     android:onClick="@{()-> viewModel.saveToAlbum()}"
-                    android:paddingHorizontal="40dp"
                     android:text="@string/detail_save"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/color_light_pink"
+                    app:icon="@drawable/ic_save"
+                    app:iconTint="@android:color/white"
+                    app:layout_constraintBottom_toTopOf="@id/btn_image_keep"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_create_user"
-                    app:layout_constraintVertical_bias="0"
-                    app:layout_constraintVertical_weight="0" />
+                    app:layout_constraintVertical_bias="1"
+                    app:strokeColor="@color/color_pink"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_image_keep"
+                    style="@style/Widget.Custom.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="56dp"
+                    android:drawableLeft="@drawable/ic_keep"
+                    android:text="@string/image_keep"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@color/color_light_pink"
+                    app:backgroundTint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="1"
+                    app:onSingleClick="@{()-> viewModel.setImageKeep(viewModel.unsplashPhoto)}"
+                    app:selected="@{viewModel.isKeepImage}"
+                    app:strokeColor="@color/color_light_pink"
+                    app:strokeWidth="1dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
