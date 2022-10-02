@@ -43,7 +43,16 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
             rvKeepImage.apply {
                 setHasFixedSize(true)
                 adapter = unsplashKeepPhotoAdapter
-                layoutManager = GridLayoutManager(requireContext(), 3)
+                layoutManager = GridLayoutManager(requireContext(), 3).apply {
+                    this.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                        override fun getSpanSize(position: Int): Int {
+                            return when (adapter?.getItemViewType(position)) {
+                                R.layout.cell_unsplash_keep_photo_header -> 3
+                                else -> 1
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -83,7 +92,7 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
         }
 
         imageKeepViewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
-            findNavController().safeNavigate(ImageKeepFragmentDirections.actionImageKeepFragmentToDetailFragment(keyword = resources.getString(R.string.image_keep_title), photoData = it))
+            findNavController().safeNavigate(ImageKeepFragmentDirections.actionImageKeepFragmentToDetailFragment(keyword = it.keyword, photoData = it))
         })
     }
 

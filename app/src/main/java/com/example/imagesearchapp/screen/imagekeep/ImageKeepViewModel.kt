@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
+import androidx.paging.map
 import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 import com.example.imagesearchapp.domain.UnsplashLocalRepository
 import com.example.imagesearchapp.util.Event
@@ -24,6 +25,16 @@ class ImageKeepViewModel @Inject constructor(
                 setKeepImageEmpty(before == null && after == null)
                 null
             }
+        }.map { pagingData ->
+            pagingData.map { KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem(it) }
+        }.map { pagingData ->
+            pagingData.insertSeparators { before: KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem?, after: KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem? ->
+                if (before?.unsplashPhotoItem?.keyword != after?.unsplashPhotoItem?.keyword) {
+                    KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoHeaderItem(after?.unsplashPhotoItem?.keyword ?: "")
+                } else {
+                    null
+                }
+            }
         }.cachedIn(viewModelScope)
 
     private val _isKeepImageEmpty = MutableLiveData<Boolean>(false)
@@ -41,4 +52,9 @@ class ImageKeepViewModel @Inject constructor(
     fun navigateToDetail(photoItem: UnsplashPhotoItem) {
         _navigateToDetail.value = Event(photoItem)
     }
+}
+
+sealed class KeepUnsplashPhotoItemUiModel {
+    data class KeepUnsplashPhotoHeaderItem(val keyword: String) : KeepUnsplashPhotoItemUiModel()
+    data class KeepUnsplashPhotoItem(val unsplashPhotoItem: UnsplashPhotoItem) : KeepUnsplashPhotoItemUiModel()
 }

@@ -16,7 +16,7 @@ class DetailViewModel @Inject constructor(
     private val unSplashLocalRepository: UnsplashLocalRepository
 ) : ViewModel() {
 
-    val keyword = savedStateHandle.get<String?>(KEY_KEYWORD)
+    val keyword = savedStateHandle.get<String>(KEY_KEYWORD)
     val unsplashPhoto = savedStateHandle.get<UnsplashPhotoItem>(KEY_PHOTO_DATA)
 
     private val _isKeepImage = MutableLiveData<Boolean>(false)
@@ -54,7 +54,7 @@ class DetailViewModel @Inject constructor(
         viewModelScope.launch {
             unsplashPhoto?.let {
                 if (isKeepImage.value == false) {
-                    unSplashLocalRepository.setUnSplash(it)
+                    unSplashLocalRepository.setUnSplash(it.copy(keyword = (keyword ?: "").trim()))
                 } else {
                     unSplashLocalRepository.deleteUnSplashPhoto(it.id)
                 }

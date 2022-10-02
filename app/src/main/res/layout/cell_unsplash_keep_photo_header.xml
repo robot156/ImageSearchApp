@@ -6,29 +6,25 @@
     <data>
 
         <variable
-            name="viewModel"
-            type="com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModel" />
-
-        <variable
-            name="photo"
-            type="com.example.imagesearchapp.data.model.UnsplashPhotoItem" />
+            name="keyword"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:onSingleClick="@{() -> viewModel.navigateToDetail(photo)}">
+        android:layout_marginTop="6dp">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <TextView
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="centerCrop"
-            app:imageUrl="@{photo.imageUrl}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="1:1"
+            android:layout_height="wrap_content"
+            android:padding="6dp"
+            android:text="@{keyword}"
+            android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+            android:textColor="@android:color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            tools:text="키워드가 들어갈 자리" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

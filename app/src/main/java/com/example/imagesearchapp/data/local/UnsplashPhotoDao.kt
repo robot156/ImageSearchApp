@@ -7,7 +7,7 @@ import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 @Dao
 interface UnsplashPhotoDao {
 
-    @Query("SELECT * FROM UnsplashPhoto")
+    @Query("SELECT * FROM UnsplashPhoto ORDER BY keyword")
     fun getKeepImages(): PagingSource<Int, UnsplashPhotoItem>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

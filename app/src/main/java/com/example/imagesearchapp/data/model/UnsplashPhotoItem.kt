@@ -16,5 +16,7 @@ data class UnsplashPhotoItem(
     @ColumnInfo(name = "imageUrl")
     val imageUrl: String,
     @ColumnInfo(name = "imageDescription")
-    val imageDescription: String?
+    val imageDescription: String?,
+    @ColumnInfo(name = "keyword")
+    val keyword: String = ""
 ) : Parcelable

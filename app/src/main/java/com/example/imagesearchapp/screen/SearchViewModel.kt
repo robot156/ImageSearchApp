@@ -34,7 +34,7 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-    private fun isValidEnterState() = !keyword.value.isNullOrEmpty()
+    private fun isValidEnterState() = !keyword.value.isNullOrEmpty() && !keyword.value.isNullOrBlank()
 
     fun setKeyword(keyword: String?) {
         if (this.keyword.value == keyword || keyword == null) {
