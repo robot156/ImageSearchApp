@@ -73,6 +73,10 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
             findNavController().safeNavigate(ListFragmentDirections.actionListFragmentToDetailFragment(listViewModel.keyword, it))
         })
 
+        listViewModel.navigateToBack.observe(viewLifecycleOwner, EventObserver {
+            findNavController().navigateUp()
+        })
+
         unsplashPhotoAdapter.addLoadStateListener { loadState ->
             dataBinding.apply {
                 isSuccess = loadState.source.refresh is LoadState.NotLoading

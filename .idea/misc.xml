@@ -12,7 +12,10 @@
         <entry key="app/src/main/res/drawable/ic_keep_unselected.xml" value="0.241" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2894736842105263" />
         <entry key="app/src/main/res/drawable/ic_like.xml" value="0.241" />
+        <entry key="app/src/main/res/drawable/ic_placeholder.xml" value="0.1805" />
+        <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.32001682085786376" />
+        <entry key="app/src/main/res/drawable/ic_search_not_found.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_unsplash.xml" value="0.3787037037037037" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/drawable/selecter_button.xml" value="0.346782431052094" />

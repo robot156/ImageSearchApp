@@ -18,12 +18,13 @@ class ImageKeepViewModel @Inject constructor(
     unsplashLocalRepository: UnsplashLocalRepository
 ) : ViewModel() {
 
-    val keepImages = unsplashLocalRepository.getUnSplashPhotos().map { pagingData ->
-        pagingData.insertSeparators { before: UnsplashPhotoItem?, after: UnsplashPhotoItem? ->
-            setKeepImageEmpty(before == null && after == null)
-            null
-        }
-    }.cachedIn(viewModelScope)
+    val keepImages = unsplashLocalRepository.getUnSplashPhotos()
+        .map { pagingData ->
+            pagingData.insertSeparators { before: UnsplashPhotoItem?, after: UnsplashPhotoItem? ->
+                setKeepImageEmpty(before == null && after == null)
+                null
+            }
+        }.cachedIn(viewModelScope)
 
     private val _isKeepImageEmpty = MutableLiveData<Boolean>(false)
     val isKeepImageEmpty: LiveData<Boolean>

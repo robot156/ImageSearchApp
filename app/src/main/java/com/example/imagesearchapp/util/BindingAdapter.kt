@@ -24,9 +24,8 @@ fun loadImage(view: ImageView, imageUrl: String?) {
 
         Glide.with(view.context)
             .load(imageUrl)
-            .thumbnail(0.3f)
-            .placeholder(android.R.color.white)
-            .error(R.drawable.ic_image_not)
+            .placeholder(R.drawable.ic_placeholder)
+            .error(R.drawable.ic_placeholder)
             .into(view)
     }
 }
