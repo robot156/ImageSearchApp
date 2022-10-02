@@ -77,7 +77,7 @@ class ListFragment : DataBindingFragment<FragmentListBinding>(R.layout.fragment_
             dataBinding.apply {
                 isSuccess = loadState.source.refresh is LoadState.NotLoading
                 isLoading = loadState.source.refresh is LoadState.Loading
-                isError = loadState.source.refresh is LoadState.Error // error 면 true
+                isError = loadState.source.refresh is LoadState.Error
             }
         }
     }

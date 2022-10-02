@@ -75,11 +75,9 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
                     .collect { loadState ->
                         with(dataBinding) {
                             isSuccess = loadState.source.refresh is LoadState.NotLoading
-                            isLoading =loadState.source.refresh is LoadState.Loading
-                            isError = loadState.source.refresh is LoadState.Error // error 면 true
+                            isLoading = loadState.source.refresh is LoadState.Loading
+                            isError = loadState.source.refresh is LoadState.Error
                         }
-
-                        imageKeepViewModel.setKeepImageEmpty((loadState.refresh is LoadState.NotLoading && unsplashKeepPhotoAdapter.itemCount == 0))
                     }
             }
         }

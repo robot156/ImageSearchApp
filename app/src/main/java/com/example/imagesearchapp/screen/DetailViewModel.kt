@@ -1,11 +1,9 @@
 package com.example.imagesearchapp.screen
 
 import androidx.lifecycle.*
-import com.example.imagesearchapp.data.model.UnsplashPhoto
 import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 import com.example.imagesearchapp.domain.FileSaveRepository
 import com.example.imagesearchapp.domain.UnsplashLocalRepository
-import com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModelDelegate
 import com.example.imagesearchapp.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -15,9 +13,8 @@ import javax.inject.Inject
 class DetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     private val fileSaveRepository: FileSaveRepository,
-    private val unSplashLocalRepository: UnsplashLocalRepository,
-    imageKeepViewModelDelegate: ImageKeepViewModelDelegate
-) : ViewModel(), ImageKeepViewModelDelegate by imageKeepViewModelDelegate {
+    private val unSplashLocalRepository: UnsplashLocalRepository
+) : ViewModel() {
 
     val keyword = savedStateHandle.get<String?>(KEY_KEYWORD)
     val unsplashPhoto = savedStateHandle.get<UnsplashPhotoItem>(KEY_PHOTO_DATA)
@@ -60,7 +57,6 @@ class DetailViewModel @Inject constructor(
                     unSplashLocalRepository.setUnSplash(it)
                 } else {
                     unSplashLocalRepository.deleteUnSplashPhoto(it.id)
-                    deleteUnsplashPhoto(it)
                 }
 
                 _isKeepImage.value = !(isKeepImage.value ?: true)
