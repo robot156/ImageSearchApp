@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_keep_selected.xml" value="0.241" />
+        <entry key="app/src/main/res/drawable/corner_radius.xml" value="0.2605" />
         <entry key="app/src/main/res/drawable/gradient.xml" value="0.3411458333333333" />
         <entry key="app/src/main/res/drawable/ic_back.xml" value="0.22236842105263158" />
         <entry key="app/src/main/res/drawable/ic_image_not.xml" value="0.2894736842105263" />
@@ -34,13 +35,14 @@
         <entry key="app/src/main/res/layout/cell_view_pager.xml" value="0.3371794871794872" />
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.27708333333333335" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.30012825994014536" />
-        <entry key="app/src/main/res/layout/fragment_image_keep.xml" value="0.16784362792968752" />
+        <entry key="app/src/main/res/layout/fragment_image_keep.xml" value="0.2514816284179688" />
         <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2659229571778517" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_test_child.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/fragment_test_child_2.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/fragment_test_container.xml" value="0.19454803466796877" />
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.3371794871794872" />
+        <entry key="app/src/main/res/layout/test_layout.xml" value="0.2821718683197948" />
         <entry key="app/src/main/res/menu/menu_like.xml" value="0.27708333333333335" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3283002588438309" />
       </map>

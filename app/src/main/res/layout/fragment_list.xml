@@ -186,5 +186,7 @@
                 app:strokeColor="@color/color_pink"
                 app:strokeWidth="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

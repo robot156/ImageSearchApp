@@ -5,6 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.ViewDataBinding
 import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.NavOptions
@@ -34,4 +35,9 @@ fun Job?.cancelIfActive() {
     if (this?.isActive == true) {
         cancel()
     }
+}
+
+fun <T : ViewDataBinding> T.executeAfter(block: T.() -> Unit) {
+    block()
+    executePendingBindings()
 }

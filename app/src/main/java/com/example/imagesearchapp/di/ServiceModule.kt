@@ -1,5 +1,6 @@
 package com.example.imagesearchapp.di
 
+import com.example.imagesearchapp.BuildConfig
 import com.example.imagesearchapp.service.API
 import com.example.imagesearchapp.service.ServiceApi
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
@@ -23,7 +24,11 @@ object ServiceModule {
     fun providerHttpLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor(HttpLoggingInterceptor.Logger.DEFAULT)
             .apply {
-                level = HttpLoggingInterceptor.Level.BODY
+                level = if (BuildConfig.DEBUG) {
+                    HttpLoggingInterceptor.Level.BODY
+                } else {
+                    HttpLoggingInterceptor.Level.NONE
+                }
             }
     }
 

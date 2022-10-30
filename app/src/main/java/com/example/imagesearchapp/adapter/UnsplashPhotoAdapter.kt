@@ -7,10 +7,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.example.imagesearchapp.R
 import com.example.imagesearchapp.adapter.viewholder.UnsplashPhotoViewHolder
-import com.example.imagesearchapp.data.model.UnsplashPhoto
 import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 import com.example.imagesearchapp.databinding.CellUnsplashPhotoBinding
 import com.example.imagesearchapp.screen.ListViewModel
+import com.example.imagesearchapp.util.executeAfter
 
 class UnsplashPhotoAdapter(
     private val listViewModel: ListViewModel
@@ -33,11 +33,10 @@ class UnsplashPhotoAdapter(
 
     override fun onBindViewHolder(holderUnSplash: UnsplashPhotoViewHolder, position: Int) {
         getItem(position)?.let {
-            holderUnSplash.binding.apply {
+            holderUnSplash.binding.executeAfter {
                 viewModel = listViewModel
                 lifecycleOwner = holderUnSplash.itemView.findViewTreeLifecycleOwner()
                 photo = it
-                executePendingBindings()
             }
         }
     }

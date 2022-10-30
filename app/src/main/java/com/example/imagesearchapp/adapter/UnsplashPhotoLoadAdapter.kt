@@ -6,6 +6,7 @@ import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import com.example.imagesearchapp.adapter.viewholder.UnsplashPhotoLoadViewHolder
 import com.example.imagesearchapp.databinding.CellUnsplashFooterBinding
+import com.example.imagesearchapp.util.executeAfter
 
 class UnsplashPhotoLoadAdapter(
     private val retry: () -> Unit
@@ -17,12 +18,11 @@ class UnsplashPhotoLoadAdapter(
     }
 
     override fun onBindViewHolder(holder: UnsplashPhotoLoadViewHolder, loadState: LoadState) {
-        holder.binding.apply {
+        holder.binding.executeAfter {
             isLoading = loadState is LoadState.Loading
             btnRetry.setOnClickListener {
                 retry.invoke()
             }
-            executePendingBindings()
         }
     }
 }

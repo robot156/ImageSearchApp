@@ -6,8 +6,16 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModel" />
+
+        <variable
             name="keyword"
             type="String" />
+
+        <variable
+            name="isExpanded"
+            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,12 +24,16 @@
         android:layout_marginTop="6dp">
 
         <TextView
+            android:id="@+id/tv_keyword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:padding="6dp"
             android:text="@{keyword}"
             android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
             android:textColor="@android:color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

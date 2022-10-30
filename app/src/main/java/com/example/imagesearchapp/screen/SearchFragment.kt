@@ -2,6 +2,8 @@ package com.example.imagesearchapp.screen
 
 import android.os.Bundle
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -9,7 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.DataBindingFragment
 import com.example.imagesearchapp.R
 import com.example.imagesearchapp.databinding.FragmentSearchBinding
-import com.example.imagesearchapp.util.*
+import com.example.imagesearchapp.util.DebounceEditTextListener
+import com.example.imagesearchapp.util.EventObserver
+import com.example.imagesearchapp.util.hideKeyboard
+import com.example.imagesearchapp.util.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -27,6 +32,17 @@ class SearchFragment : DataBindingFragment<FragmentSearchBinding>(R.layout.fragm
         )
     }
 
+    private val searchTextEditTextActionListener by lazy {
+        TextView.OnEditorActionListener { textView, actionId, _ ->
+            return@OnEditorActionListener if (actionId == EditorInfo.IME_ACTION_DONE && textView.text.trim().isNotEmpty()) {
+                searchViewModel.navigateToList(textView.text.toString())
+                true
+            } else {
+                false
+            }
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,9 +57,7 @@ class SearchFragment : DataBindingFragment<FragmentSearchBinding>(R.layout.fragm
 
     private fun initListener() {
         dataBinding.apply {
-            etSearch.setOnClickListener {
-                it.showKeyboard(true)
-            }
+            tietKeyword.setOnEditorActionListener(searchTextEditTextActionListener)
         }
     }
 
@@ -64,11 +78,16 @@ class SearchFragment : DataBindingFragment<FragmentSearchBinding>(R.layout.fragm
 
     override fun onResume() {
         super.onResume()
-        dataBinding.etSearch.addTextChangedListener(searchTextChangeListener)
+        dataBinding.tietKeyword.addTextChangedListener(searchTextChangeListener)
     }
 
     override fun onPause() {
-        dataBinding.etSearch.removeTextChangedListener(searchTextChangeListener)
+        dataBinding.tietKeyword.removeTextChangedListener(searchTextChangeListener)
         super.onPause()
+    }
+
+    override fun onDestroyView() {
+        dataBinding.tietKeyword.setOnEditorActionListener(null)
+        super.onDestroyView()
     }
 }

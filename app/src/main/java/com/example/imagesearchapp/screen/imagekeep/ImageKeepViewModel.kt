@@ -29,8 +29,8 @@ class ImageKeepViewModel @Inject constructor(
             pagingData.map { KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem(it) }
         }.map { pagingData ->
             pagingData.insertSeparators { before: KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem?, after: KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem? ->
-                if (before?.unsplashPhotoItem?.keyword != after?.unsplashPhotoItem?.keyword) {
-                    KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoHeaderItem(after?.unsplashPhotoItem?.keyword ?: "")
+                if (before?.unsplashPhotoItem?.keyword != after?.unsplashPhotoItem?.keyword && after?.unsplashPhotoItem?.keyword != null) {
+                    KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoHeaderItem(after.unsplashPhotoItem.keyword)
                 } else {
                     null
                 }

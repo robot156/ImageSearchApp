@@ -12,6 +12,10 @@
         <variable
             name="photo"
             type="com.example.imagesearchapp.data.model.UnsplashPhotoItem" />
+
+        <variable
+            name="keyword"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

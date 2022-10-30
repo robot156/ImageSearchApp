@@ -21,4 +21,6 @@
     <string name="image_keep_title">보관함</string>
     <string name="image_keep">보관하기</string>
     <string name="image_keep_empty">아직 보관된 이미지가 없습니다</string>
+    <string name="image_keep_expended_show">SHOW</string>
+    <string name="image_keep_expended_hide">HIDE</string>
 </resources>

@@ -13,6 +13,7 @@ import com.example.imagesearchapp.databinding.CellUnsplashKeepPhotoBinding
 import com.example.imagesearchapp.databinding.CellUnsplashKeepPhotoHeaderBinding
 import com.example.imagesearchapp.screen.imagekeep.ImageKeepViewModel
 import com.example.imagesearchapp.screen.imagekeep.KeepUnsplashPhotoItemUiModel
+import com.example.imagesearchapp.util.executeAfter
 
 class UnsplashKeepPhotoAdapter(
     private val imageKeepViewModel: ImageKeepViewModel
@@ -43,15 +44,16 @@ class UnsplashKeepPhotoAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (val uiModel = getItem(position)) {
-            is KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoHeaderItem -> (holder as UnsplashKeepPhotoHeaderViewHolder).binding.apply {
+            is KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoHeaderItem -> (holder as UnsplashKeepPhotoHeaderViewHolder).binding.executeAfter {
+                lifecycleOwner = holder.itemView.findViewTreeLifecycleOwner()
+                viewModel = imageKeepViewModel
                 keyword = uiModel.keyword
-                executePendingBindings()
             }
-            is KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem -> (holder as UnsplashKeepPhotoViewHolder).binding.apply {
+            is KeepUnsplashPhotoItemUiModel.KeepUnsplashPhotoItem -> (holder as UnsplashKeepPhotoViewHolder).binding.executeAfter {
                 lifecycleOwner = holder.itemView.findViewTreeLifecycleOwner()
                 viewModel = imageKeepViewModel
                 photo = uiModel.unsplashPhotoItem
-                executePendingBindings()
+                keyword = uiModel.unsplashPhotoItem.keyword
             }
             else -> return
         }
