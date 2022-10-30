@@ -42,6 +42,8 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:menu="@menu/menu_search"
+                app:navigationContentDescription="@string/list_back"
                 app:navigationIcon="@drawable/ic_back"
                 app:title="">
 
@@ -49,7 +51,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginHorizontal="30dp"
                     android:text="@{viewModel.keyword}"
                     android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
                     android:textColor="@android:color/white"
@@ -57,16 +58,61 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_photo"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="@{isSuccess ? View.VISIBLE : View.GONE}"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appbar"
-            tools:visibility="visible" />
+            app:layout_constraintTop_toBottomOf="@id/appbar">
+
+            <FrameLayout
+                android:id="@+id/fl_search"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:padding="6dp"
+                android:visibility="visible"
+                app:isGone="@{!viewModel.isSearchMenuVisible}">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_keyword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="0dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeColor="@color/color_light_pink"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="clear_text"
+                    app:shapeAppearance="@style/ShapeAppearance.LargeComponent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_keyword"
+                        style="@style/TextAppearance.imgSearch.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:ellipsize="end"
+                        android:hint="@string/search_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:text="@{viewModel.keyword}" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </FrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_photo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{isSuccess ? View.VISIBLE : View.GONE}"
+                tools:listitem="@layout/cell_unsplash_photo"
+                tools:visibility="visible" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/pb_rv_load"
@@ -91,7 +137,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_retry"
@@ -113,7 +159,7 @@
             app:layout_constraintVertical_bias="0"
             app:strokeColor="@color/color_pink"
             app:strokeWidth="1dp"
-            tools:visibility="visible" />
+            tools:visibility="gone" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_empty_search_result"
@@ -186,7 +232,6 @@
                 app:strokeColor="@color/color_pink"
                 app:strokeWidth="1dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,34 +5,44 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
-import com.example.imagesearchapp.data.model.UnsplashPhoto
 import com.example.imagesearchapp.data.model.UnsplashPhotoItem
 import com.example.imagesearchapp.data.model.mapToItem
 import com.example.imagesearchapp.domain.UnsplashRemoteRepository
 import com.example.imagesearchapp.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ListViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle,
+    private val savedStateHandle: SavedStateHandle,
     repository: UnsplashRemoteRepository
 ) : ViewModel() {
 
-    val keyword = savedStateHandle.get<String>(KEY_KEYWORD) ?: ""
+    private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 
-    val photos: Flow<PagingData<UnsplashPhotoItem>> = repository
-        .getSearchResults(keyword)
-        .map { pagingData -> pagingData.map { it.mapToItem() } }
-        .map { pagingData ->
-            pagingData.insertSeparators { before: UnsplashPhotoItem?, after: UnsplashPhotoItem? ->
-                setListEmpty(before == null && after == null)
-                null
-            }
+    val keyword = savedStateHandle.getLiveData<String>(KEY_KEYWORD).asFlow()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+
+    val photos: Flow<PagingData<UnsplashPhotoItem>> = merge(
+        clearListCh.receiveAsFlow().map { PagingData.empty() },
+        keyword.filterNotNull().flatMapLatest { keyword ->
+            repository.getSearchResults(keyword)
+                .map { pagingData -> pagingData.map { it.mapToItem() } }
+                .map { pagingData ->
+                    pagingData.insertSeparators { before: UnsplashPhotoItem?, after: UnsplashPhotoItem? ->
+                        setListEmpty(before == null && after == null)
+                        null
+                    }
+                }
+                .distinctUntilChanged()
         }
-        .distinctUntilChanged()
-        .cachedIn(viewModelScope)
+    ).cachedIn(viewModelScope)
+
+    private val _isSearchMenuVisible = MutableLiveData<Boolean>(false)
+    val isSearchMenuVisible: LiveData<Boolean>
+        get() = _isSearchMenuVisible
 
     private val _isSearchImageEmpty = MutableLiveData<Boolean>(false)
     val isSearchImageEmpty: LiveData<Boolean>
@@ -52,6 +62,19 @@ class ListViewModel @Inject constructor(
 
     private fun setListEmpty(isEmpty: Boolean) {
         _isSearchImageEmpty.value = isEmpty
+    }
+
+    fun setKeyword(keyword: String) {
+        if (this.keyword.value == keyword) {
+            return
+        }
+
+        clearListCh.trySend(Unit)
+        savedStateHandle.set(KEY_KEYWORD, keyword)
+    }
+
+    fun setSearchMenuVisible(isVisible: Boolean) {
+        _isSearchMenuVisible.value = isVisible
     }
 
     fun clickRefresh() {

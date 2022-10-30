@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_placeholder.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_refresh.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_save.xml" value="0.32001682085786376" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.221" />
         <entry key="app/src/main/res/drawable/ic_search_not_found.xml" value="0.1805" />
         <entry key="app/src/main/res/drawable/ic_unsplash.xml" value="0.3787037037037037" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.3411458333333333" />
@@ -36,7 +37,7 @@
         <entry key="app/src/main/res/layout/dialog_loading.xml" value="0.27708333333333335" />
         <entry key="app/src/main/res/layout/fragment_detail.xml" value="0.30012825994014536" />
         <entry key="app/src/main/res/layout/fragment_image_keep.xml" value="0.2514816284179688" />
-        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.2659229571778517" />
+        <entry key="app/src/main/res/layout/fragment_list.xml" value="0.3445022583007813" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_test_child.xml" value="0.34375" />
         <entry key="app/src/main/res/layout/fragment_test_child_2.xml" value="0.34375" />
@@ -44,6 +45,7 @@
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.3371794871794872" />
         <entry key="app/src/main/res/layout/test_layout.xml" value="0.2821718683197948" />
         <entry key="app/src/main/res/menu/menu_like.xml" value="0.27708333333333335" />
+        <entry key="app/src/main/res/menu/menu_search.xml" value="0.19923044035912782" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3283002588438309" />
       </map>
     </option>

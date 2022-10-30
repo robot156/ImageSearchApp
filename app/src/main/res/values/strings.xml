@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">ImageSearchApp</string>
 
+    <string name="search_title">검색</string>
     <string name="search_hint">찾으시는 이미지를 검색해보세요.</string>
     <string name="search_start">검색하기</string>
 
