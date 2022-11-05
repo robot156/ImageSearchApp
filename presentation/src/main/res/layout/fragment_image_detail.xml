@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.imagesearchapp.presentation.screen.imagedetail.ImageDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".screen.imagedetail.ImageDetailFragment"
+        tools:theme="@style/Theme.ImageSearchApp.Search">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:navigationIcon="@drawable/ic_back"
+                app:title="">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginHorizontal="30dp"
+                    android:text="@{viewModel.keyword}"
+                    android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+                    android:textColor="@android:color/white"
+                    tools:text="doge" />
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_detail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    app:imageUrl="@{viewModel.unsplashImage.imageUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_height="300dp"
+                    tools:scaleType="centerCrop"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="2dp"
+                    android:text="@{viewModel.unsplashImage.imageDescription}"
+                    android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+                    android:textColor="@android:color/black"
+                    app:isGone="@{viewModel.unsplashImage.imageDescription == null}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_photo"
+                    tools:text="설명이 들어가는 텍스트" />
+
+                <TextView
+                    android:id="@+id/tv_create_user"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="end"
+                    android:text="@{@string/detail_user(viewModel.unsplashImage.userName)}"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_description"
+                    app:layout_constraintVertical_chainStyle="spread_inside"
+                    tools:text="작성자명이 들어가는 텍스트" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_save"
+                    style="@style/Widget.Custom.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="15dp"
+                    android:onClick="@{()-> viewModel.saveToAlbum()}"
+                    android:text="@string/detail_save"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@android:color/white"
+                    app:backgroundTint="@color/color_light_pink"
+                    app:icon="@drawable/ic_save"
+                    app:iconTint="@android:color/white"
+                    app:layout_constraintBottom_toTopOf="@id/btn_image_keep"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_create_user"
+                    app:layout_constraintVertical_bias="1"
+                    app:strokeColor="@color/color_pink"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_image_keep"
+                    style="@style/Widget.Custom.Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="56dp"
+                    android:drawableLeft="@drawable/ic_keep"
+                    android:text="@string/image_keep"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@color/color_light_pink"
+                    app:backgroundTint="@android:color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="1"
+                    app:onSingleClick="@{()-> viewModel.setImageKeep(viewModel.unsplashImage)}"
+                    app:selected="@{viewModel.isKeepImage}"
+                    app:strokeColor="@color/color_light_pink"
+                    app:strokeWidth="1dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

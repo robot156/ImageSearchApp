@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:theme="@style/Theme.ImageSearchApp.Search"
+        tools:context=".screen.imagesearch.ImageSearchFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nsv_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.google.android.material.button.MaterialButton
+                    style="@style/Widget.Custom.IconButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginEnd="35dp"
+                    app:icon="@drawable/ic_keep_selected"
+                    app:iconTint="@color/color_light_pink"
+                    app:layout_constraintBottom_toTopOf="@id/iv_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0"
+                    app:onSingleClick="@{()-> viewModel.navigateToStorage()}"
+                    app:strokeColor="@color/color_light_pink"
+                    app:strokeWidth="1dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_title"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/ic_unsplash"
+                    app:layout_constraintBottom_toTopOf="@id/til_keyword"
+                    app:layout_constraintEnd_toEndOf="@id/til_keyword"
+                    app:layout_constraintStart_toStartOf="@id/til_keyword"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="packed" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_keyword"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="36dp"
+                    android:layout_marginTop="20dp"
+                    android:elevation="0dp"
+                    app:boxBackgroundColor="@android:color/white"
+                    app:boxStrokeColor="@color/color_light_pink"
+                    app:boxStrokeWidth="1dp"
+                    app:boxStrokeWidthFocused="1dp"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintBottom_toTopOf="@id/btn_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_title"
+                    app:shapeAppearance="@style/ShapeAppearance.LargeComponent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/tiet_keyword"
+                        style="@style/TextAppearance.imgSearch.Body1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/search_hint"
+                        android:imeOptions="actionDone"
+                        android:inputType="text"
+                        android:minHeight="56dp"
+                        android:padding="12dp"
+                        android:text="@{viewModel.keyword != null ? viewModel.keyword : ``}"
+                        android:textColor="@android:color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_search"
+                    style="@style/Widget.Custom.Button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="46dp"
+                    android:enabled="@{viewModel.enabledInputKeyword}"
+                    android:text="@string/search_start"
+                    android:textAppearance="@style/TextAppearance.imgSearch.Body1"
+                    android:textColor="@{viewModel.enabledInputKeyword ? @android:color/white : @color/color_959595 }"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/til_keyword"
+                    app:layout_constraintStart_toStartOf="@id/til_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/til_keyword"
+                    app:onSingleClick="@{()-> viewModel.navigateToList(viewModel.keyword)}" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,5 +1,9 @@
 package com.example.imagesearchapp.di
 
+import com.example.imagesearchapp.domain.di.DefaultDispatcher
+import com.example.imagesearchapp.domain.di.IoDispatcher
+import com.example.imagesearchapp.domain.di.MainDispatcher
+import com.example.imagesearchapp.domain.di.MainImmediateDispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,4 +26,8 @@ object CoroutinesModule {
     @MainDispatcher
     @Provides
     fun providesMainDispatcher(): CoroutineDispatcher = Dispatchers.Main
+
+    @MainImmediateDispatcher
+    @Provides
+    fun providesMainImmediateDispatcher(): CoroutineDispatcher = Dispatchers.Main.immediate
 }

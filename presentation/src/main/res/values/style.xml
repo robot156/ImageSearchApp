@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.imgSearch" parent="TextAppearance.AppCompat" />
+
+    <style name="TextAppearance.imgSearch.HeadLine1">
+        <item name="android:fontFamily">@font/font_bold</item>
+        <item name="fontFamily">@font/font_bold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="TextAppearance.imgSearch.HeadLine2">
+        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="fontFamily">@font/font_regular</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="TextAppearance.imgSearch.Body0">
+        <item name="android:fontFamily">@font/font_demi_light</item>
+        <item name="fontFamily">@font/font_demi_light</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <style name="TextAppearance.imgSearch.Body1">
+        <item name="android:fontFamily">@font/font_demi_light</item>
+        <item name="fontFamily">@font/font_demi_light</item>
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <style name="Widget.Custom.Button" parent="Widget.MaterialComponents.Button">
+        <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.imgSearch.HeadLine2</item>
+        <item name="backgroundTint">@color/selected_button</item>
+        <item name="android:textColor">@color/selected_button_text</item>
+    </style>
+
+    <style name="Widget.Custom.IconButton" parent="Widget.Material3.Button.IconButton">
+        <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="backgroundTint">@android:color/white</item>
+        <item name="iconTint">@color/colorPrimary</item>
+    </style>
+</resources>
