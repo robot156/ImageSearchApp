@@ -17,8 +17,9 @@
         android:windowSoftInputMode="adjustPan|stateHidden">
 
         <activity
-            android:name=".screen.MainActivity"
+            android:name=".presentation.screen.MainActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

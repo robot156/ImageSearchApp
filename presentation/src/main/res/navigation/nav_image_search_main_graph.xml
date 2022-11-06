@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_image_search_main"
+    app:startDestination="@id/imageSearchFragment">
+
+    <fragment
+        android:id="@+id/imageSearchFragment"
+        android:name="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchFragment"
+        android:label="ImageSearchFragment"
+        tools:layout="@layout/fragment_image_search">
+
+        <action
+            android:id="@+id/action_imageSearchFragment_to_imageSearchListFragment"
+            app:destination="@id/imageSearchListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+
+            <argument
+                android:name="keyword"
+                app:argType="string"
+                app:nullable="false" />
+        </action>
+
+        <action
+            android:id="@+id/action_imageSearchFragment_to_imageKeepFragment"
+            app:destination="@id/imageKeepFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageSearchListFragment"
+        android:name="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchListFragment"
+        android:label="ImageSearchListFragment"
+        tools:layout="@layout/fragment_image_search_list">
+
+        <action
+            android:id="@+id/action_imageSearchListFragment_to_detailFragment"
+            app:destination="@id/imageDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageKeepFragment"
+        android:name="com.example.imagesearchapp.presentation.screen.imagekeep.ImageKeepFragment"
+        android:label="ImageKeepFragment"
+        tools:layout="@layout/fragment_image_keep">
+
+        <action
+            android:id="@+id/action_imageKeepFragment_to_imageDetailFragment"
+            app:destination="@id/imageDetailFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim">
+
+            <argument
+                android:name="image_data"
+                app:argType="com.example.imagesearchapp.presentation.model.UnsplashImageItem"
+                app:nullable="false" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/imageDetailFragment"
+        android:name="com.example.imagesearchapp.presentation.screen.imagedetail.ImageDetailFragment"
+        android:label="ImageDetailFragment"
+        tools:layout="@layout/fragment_image_detail">
+
+        <argument
+            android:name="keyword"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="image_data"
+            app:argType="com.example.imagesearchapp.presentation.model.UnsplashImageItem"
+            app:nullable="false" />
+    </fragment>
+</navigation>
