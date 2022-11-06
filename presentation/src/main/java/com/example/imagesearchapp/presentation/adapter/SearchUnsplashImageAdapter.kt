@@ -14,17 +14,16 @@ import com.example.imagesearchapp.presentation.utils.executeAfter
 
 class SearchUnsplashImageAdapter(
     private val imageSearchListViewModel: ImageSearchListViewModel
-) : PagingDataAdapter<UnsplashImageItem, SearchUnsplashImageViewHolder>(PHOTO_COMPARATOR) {
+) : PagingDataAdapter<UnsplashImageItem, SearchUnsplashImageViewHolder>(
+    object : DiffUtil.ItemCallback<UnsplashImageItem>() {
+        override fun areItemsTheSame(oldItem: UnsplashImageItem, newItem: UnsplashImageItem) =
+            oldItem.id == newItem.id
 
-    companion object {
-        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<UnsplashImageItem>() {
-            override fun areItemsTheSame(oldItem: UnsplashImageItem, newItem: UnsplashImageItem) =
-                oldItem.id == newItem.id
-
-            override fun areContentsTheSame(oldItem: UnsplashImageItem, newItem: UnsplashImageItem) =
-                oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: UnsplashImageItem, newItem: UnsplashImageItem) =
+            oldItem == newItem
     }
+) {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchUnsplashImageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -36,7 +35,7 @@ class SearchUnsplashImageAdapter(
             holderUnSplash.binding.executeAfter {
                 viewModel = imageSearchListViewModel
                 lifecycleOwner = holderUnSplash.itemView.findViewTreeLifecycleOwner()
-                photo = it
+                imageItem = it
             }
         }
     }

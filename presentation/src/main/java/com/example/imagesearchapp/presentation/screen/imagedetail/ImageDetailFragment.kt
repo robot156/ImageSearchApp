@@ -71,7 +71,7 @@ class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.lay
     @AfterPermissionGranted(STORAGE_PERMISSION_REQUEST_CODE)
     private fun requestStoragePermission() {
         if (EasyPermissions.hasPermissions(requireContext(), *STORAGE_PERMISSION)) {
-            val byteArray = dataBinding.ivPhoto.let { view ->
+            val byteArray = dataBinding.ivUnsplashImage.let { view ->
                 createByteArrayFromView(view, view.width, view.height)
             }
 

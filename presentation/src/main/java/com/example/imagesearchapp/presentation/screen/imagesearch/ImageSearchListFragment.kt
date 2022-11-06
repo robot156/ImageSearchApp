@@ -68,7 +68,7 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
     }
 
     private fun initView() {
-        dataBinding.rvPhoto.apply {
+        dataBinding.rvImage.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter = searchUnsplashImageAdapter.withLoadStateHeaderAndFooter(
@@ -99,7 +99,7 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
             }
 
             tietKeyword.setOnEditorActionListener(searchTextEditTextActionListener)
-            rvPhoto.addOnScrollListener(searchRecyclerViewScrollStateListener)
+            rvImage.addOnScrollListener(searchRecyclerViewScrollStateListener)
         }
     }
 
@@ -137,8 +137,8 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
 
     override fun onDestroyView() {
         dataBinding.apply {
-            rvPhoto.removeOnScrollListener(searchRecyclerViewScrollStateListener)
-            rvPhoto.adapter = null
+            rvImage.removeOnScrollListener(searchRecyclerViewScrollStateListener)
+            rvImage.adapter = null
             tietKeyword.setOnEditorActionListener(null)
         }
         super.onDestroyView()

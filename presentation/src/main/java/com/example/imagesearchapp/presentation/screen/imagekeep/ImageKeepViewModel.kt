@@ -49,8 +49,8 @@ class ImageKeepViewModel @Inject constructor(
         _isKeepImageEmpty.value = isEmpty
     }
 
-    fun navigateToDetail(photoItem: UnsplashImageItem) {
-        _navigateToDetail.value = Event(photoItem)
+    fun navigateToDetail(imageItem: UnsplashImageItem) {
+        _navigateToDetail.value = Event(imageItem)
     }
 }
 

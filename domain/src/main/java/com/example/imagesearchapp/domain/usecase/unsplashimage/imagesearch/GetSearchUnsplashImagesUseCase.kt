@@ -37,7 +37,6 @@ open class GetSearchUnsplashImagesUseCase @Inject constructor(
                         )
                     }
                 } catch (exception :Exception) {
-                    println("GetSearchUnsplashImagesUseCase $exception")
                     LoadResult.Error(exception)
                 }
             }

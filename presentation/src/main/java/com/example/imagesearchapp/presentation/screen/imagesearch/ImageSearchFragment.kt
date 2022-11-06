@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.databinding.FragmentImageSearchBinding
@@ -36,7 +35,7 @@ class ImageSearchFragment : DataBindingFragment<FragmentImageSearchBinding>(R.la
     private val searchTextEditTextActionListener by lazy {
         TextView.OnEditorActionListener { textView, actionId, _ ->
             return@OnEditorActionListener if (actionId == EditorInfo.IME_ACTION_DONE && textView.text.trim().isNotEmpty()) {
-                imageSearchViewModel.navigateToList(textView.text.toString())
+                imageSearchViewModel.navigateToSearchList(textView.text.toString())
                 true
             } else {
                 false
@@ -63,7 +62,7 @@ class ImageSearchFragment : DataBindingFragment<FragmentImageSearchBinding>(R.la
     }
 
     private fun initObserver() {
-        imageSearchViewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver { keyword ->
+        imageSearchViewModel.navigateToSearchList.observe(viewLifecycleOwner, EventObserver { keyword ->
             lifecycleScope.launch {
                 dataBinding.root.hideKeyboard().also {
                     delay(500)
@@ -72,7 +71,7 @@ class ImageSearchFragment : DataBindingFragment<FragmentImageSearchBinding>(R.la
             }
         })
 
-        imageSearchViewModel.navigateToStorage.observe(viewLifecycleOwner, EventObserver {
+        imageSearchViewModel.navigateToKeep.observe(viewLifecycleOwner, EventObserver {
             findNavController().safeNavigate(ImageSearchFragmentDirections.actionImageSearchFragmentToImageKeepFragment())
         })
     }

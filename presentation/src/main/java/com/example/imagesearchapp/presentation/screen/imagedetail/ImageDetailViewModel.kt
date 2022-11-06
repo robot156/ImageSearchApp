@@ -69,6 +69,8 @@ class ImageDetailViewModel @Inject constructor(
                 } else {
                     deleteKeepUnsplashImageUseCase(DeleteKeepUnsplashImageUseCase.Params(it.id))
                 }
+
+                _isKeepImage.value = !(isKeepImage.value ?: true)
             }
         }
     }

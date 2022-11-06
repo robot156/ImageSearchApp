@@ -18,13 +18,13 @@ class ImageSearchViewModel @Inject constructor(
     val enabledInputKeyword: LiveData<Boolean>
         get() = _enabledInputKeyword
 
-    private val _navigateToDetail = MutableLiveData<Event<String>>()
-    val navigateToDetail: LiveData<Event<String>>
-        get() = _navigateToDetail
+    private val _navigateToSearchList = MutableLiveData<Event<String>>()
+    val navigateToSearchList: LiveData<Event<String>>
+        get() = _navigateToSearchList
 
-    private val _navigateToStorage = MutableLiveData<Event<Unit>>()
-    val navigateToStorage: LiveData<Event<Unit>>
-        get() = _navigateToStorage
+    private val _navigateToKeep = MutableLiveData<Event<Unit>>()
+    val navigateToKeep: LiveData<Event<Unit>>
+        get() = _navigateToKeep
 
     init {
         with(_enabledInputKeyword) {
@@ -43,12 +43,12 @@ class ImageSearchViewModel @Inject constructor(
         savedStateHandle.set(KEY_KEYWORD, keyword)
     }
 
-    fun navigateToList(keyword: String?) {
-        _navigateToDetail.value = Event(keyword!!)
+    fun navigateToSearchList(keyword: String?) {
+        _navigateToSearchList.value = Event(keyword!!)
     }
 
-    fun navigateToStorage() {
-        _navigateToStorage.value = Event(Unit)
+    fun navigateToKeep() {
+        _navigateToKeep.value = Event(Unit)
     }
 
     companion object {

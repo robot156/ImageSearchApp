@@ -1,5 +1,6 @@
 package com.example.imagesearchapp.data.source.unsplashimage.model
 
+import com.example.imagesearchapp.data.source.Model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,4 +12,4 @@ internal data class PagedOfUnsplashImageResults(
     val totalPages: Int,
     @SerialName("results")
     val results: List<UnsplashImageResult>
-) : java.io.Serializable
+) : Model

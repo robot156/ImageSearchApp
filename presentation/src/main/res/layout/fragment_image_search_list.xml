@@ -27,8 +27,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screen.imagesearch.ImageSearchListFragment"
-        tools:theme="@style/Theme.ImageSearchApp.Search">
+        android:theme="@style/Theme.ImageSearchApp.Search"
+        tools:context=".screen.imagesearch.ImageSearchListFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -106,7 +106,7 @@
             </FrameLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_photo"
+                android:id="@+id/rv_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{isSuccess ? View.VISIBLE : View.GONE}"

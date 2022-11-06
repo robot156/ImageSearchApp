@@ -83,8 +83,8 @@ class ImageSearchListViewModel @Inject constructor(
         _clickRefresh.value = Event(Unit)
     }
 
-    fun navigateToDetail(photoData: UnsplashImageItem) {
-        _navigateToDetail.value = Event(photoData)
+    fun navigateToDetail(imageItem: UnsplashImageItem) {
+        _navigateToDetail.value = Event(imageItem)
     }
 
     fun navigateToBack() {

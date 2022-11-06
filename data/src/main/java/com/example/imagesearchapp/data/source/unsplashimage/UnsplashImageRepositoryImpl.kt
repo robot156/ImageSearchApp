@@ -6,7 +6,6 @@ import com.example.imagesearchapp.domain.usecase.unsplashimage.entity.UnsplashIm
 import com.example.imagesearchapp.domain.utils.ResultState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 import javax.inject.Inject
 
 class UnsplashImageRepositoryImpl @Inject constructor(
@@ -22,8 +21,8 @@ class UnsplashImageRepositoryImpl @Inject constructor(
         return unsplashImageLocalDataSource.getKeepUnsplashImages().map { ResultState.Success(it) }
     }
 
-    override suspend fun setKeepUnsplashImage(unsplashPhotoItem: UnsplashImageEntity) {
-        unsplashImageLocalDataSource.setKeepUnsplashImage(unsplashPhotoItem)
+    override suspend fun setKeepUnsplashImage(unsplashImageItem: UnsplashImageEntity) {
+        unsplashImageLocalDataSource.setKeepUnsplashImage(unsplashImageItem)
     }
 
     override suspend fun getKeepUnsplashImage(imageId: String): UnsplashImageEntity? {

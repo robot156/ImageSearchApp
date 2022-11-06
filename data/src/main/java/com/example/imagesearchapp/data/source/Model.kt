@@ -1,3 +1,3 @@
 package com.example.imagesearchapp.data.source
 
-interface Model
+interface Model : java.io.Serializable

@@ -11,7 +11,7 @@ interface UnsplashImageRepository {
 
     fun getKeepUnsplashImages(): Flow<ResultState<PagingData<UnsplashImageEntity>>>
 
-    suspend fun setKeepUnsplashImage(unsplashPhotoItem: UnsplashImageEntity)
+    suspend fun setKeepUnsplashImage(unsplashImageItem: UnsplashImageEntity)
 
     suspend fun getKeepUnsplashImage(imageId: String) : UnsplashImageEntity?
 

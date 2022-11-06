@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screen.imagedetail.ImageDetailFragment"
-        tools:theme="@style/Theme.ImageSearchApp.Search">
+        android:theme="@style/Theme.ImageSearchApp.Search"
+        tools:context=".screen.imagedetail.ImageDetailFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -58,7 +58,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_photo"
+                    android:id="@+id/iv_unsplash_image"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
@@ -83,7 +83,7 @@
                     app:isGone="@{viewModel.unsplashImage.imageDescription == null}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_photo"
+                    app:layout_constraintTop_toBottomOf="@id/iv_unsplash_image"
                     tools:text="설명이 들어가는 텍스트" />
 
                 <TextView

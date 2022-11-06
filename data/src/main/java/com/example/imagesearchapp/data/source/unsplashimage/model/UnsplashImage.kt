@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.imagesearchapp.data.source.Model
 
-@Entity(tableName = "UnsplashPhoto")
+@Entity(tableName = "UnsplashImage")
 internal data class UnsplashImage(
     @PrimaryKey
     val id: String,

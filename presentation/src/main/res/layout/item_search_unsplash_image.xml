@@ -10,22 +10,22 @@
             type="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchListViewModel" />
 
         <variable
-            name="photo"
+            name="imageItem"
             type="com.example.imagesearchapp.presentation.model.UnsplashImageItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()-> viewModel.navigateToDetail(photo)}">
+        android:onClick="@{()-> viewModel.navigateToDetail(imageItem)}">
 
         <ImageView
-            android:id="@+id/iv_photo"
+            android:id="@+id/iv_unsplash_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="?selectableItemBackground"
             android:scaleType="centerCrop"
-            app:imageUrl="@{photo.imageUrl}"
+            app:imageUrl="@{imageItem.imageUrl}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="H, 3:1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             android:drawablePadding="4dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:text="@{photo.userName}"
+            android:text="@{imageItem.userName}"
             android:textColor="@android:color/white"
             app:drawableStartCompat="@drawable/ic_user"
             app:layout_constraintBottom_toBottomOf="parent"

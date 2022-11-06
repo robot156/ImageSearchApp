@@ -44,7 +44,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0"
-                    app:onSingleClick="@{()-> viewModel.navigateToStorage()}"
+                    app:onSingleClick="@{()-> viewModel.navigateToKeep()}"
                     app:strokeColor="@color/color_light_pink"
                     app:strokeWidth="1dp" />
 
@@ -106,7 +106,7 @@
                     app:layout_constraintEnd_toEndOf="@id/til_keyword"
                     app:layout_constraintStart_toStartOf="@id/til_keyword"
                     app:layout_constraintTop_toBottomOf="@id/til_keyword"
-                    app:onSingleClick="@{()-> viewModel.navigateToList(viewModel.keyword)}" />
+                    app:onSingleClick="@{()-> viewModel.navigateToSearchList(viewModel.keyword)}" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

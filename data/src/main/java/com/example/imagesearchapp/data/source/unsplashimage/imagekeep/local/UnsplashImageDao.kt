@@ -10,15 +10,15 @@ import com.example.imagesearchapp.data.source.unsplashimage.model.UnsplashImage
 @Dao
 internal interface UnsplashImageDao {
 
-    @Query("SELECT * FROM UnsplashPhoto ORDER BY keyword")
+    @Query("SELECT * FROM UnsplashImage ORDER BY keyword")
     fun getKeepUnsplashImages(): PagingSource<Int, UnsplashImage>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUnsplashImage(unsplashImage: UnsplashImage)
 
-    @Query("SELECT * FROM UnsplashPhoto WHERE id is NULL OR id = :imageId")
+    @Query("SELECT * FROM UnsplashImage WHERE id is NULL OR id = :imageId")
     suspend fun getUnsplashImage(imageId: String): UnsplashImage?
 
-    @Query("DELETE FROM UnsplashPhoto WHERE id is NULL OR id = :imageId")
+    @Query("DELETE FROM UnsplashImage WHERE id is NULL OR id = :imageId")
     suspend fun deleteUnsplashImage(imageId: String)
 }
