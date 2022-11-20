@@ -54,6 +54,7 @@ dependencies {
     implementation(Libraries.AndroidX.constraint)
     implementation(Libraries.AndroidX.activity)
     implementation(Libraries.AndroidX.fragment)
+    implementation(Libraries.AndroidX.startUp)
 
     //Android Lifecycle
     implementation(Libraries.AndroidX.Lifecycle.runtime)

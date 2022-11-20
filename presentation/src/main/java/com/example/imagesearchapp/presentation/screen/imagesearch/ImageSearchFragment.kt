@@ -65,7 +65,7 @@ class ImageSearchFragment : DataBindingFragment<FragmentImageSearchBinding>(R.la
         imageSearchViewModel.navigateToSearchList.observe(viewLifecycleOwner, EventObserver { keyword ->
             lifecycleScope.launch {
                 dataBinding.root.hideKeyboard().also {
-                    delay(500)
+                    delay(100)
                     findNavController().safeNavigate(ImageSearchFragmentDirections.actionImageSearchFragmentToImageSearchListFragment(keyword))
                 }
             }

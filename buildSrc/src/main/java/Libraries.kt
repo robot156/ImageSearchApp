@@ -21,6 +21,7 @@ object Libraries {
         const val design = "com.google.android.material:material:${Versions.AndroidX.design}"
         const val activity = "androidx.activity:activity-ktx:${Versions.AndroidX.activity}"
         const val fragment = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragment}"
+        const val startUp = "androidx.startup:startup-runtime:${Versions.AndroidX.startUp}"
 
         object Lifecycle {
             const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.lifecycle}"

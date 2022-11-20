@@ -17,6 +17,7 @@ object Versions {
         const val activity = "1.5.1"
         const val fragment ="1.5.2"
         const val design = "1.7.0"
+        const val startUp = "1.1.1"
 
         const val lifecycle = "2.5.1"
         const val room = "2.4.1"
