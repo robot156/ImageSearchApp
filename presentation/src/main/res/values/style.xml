@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="TextAppearance.imgSearch" parent="TextAppearance.AppCompat" />
 
     <style name="TextAppearance.imgSearch.HeadLine1">
@@ -28,20 +29,35 @@
 
     <style name="Widget.Custom.Button" parent="Widget.MaterialComponents.Button">
         <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
-        <item name="android:layout_height">55dp</item>
+        <item name="backgroundTint">@color/selected_button</item>
+        <item name="elevation">0dp</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:insetBottom">0dp</item>
         <item name="android:insetTop">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
         <item name="android:textAppearance">@style/TextAppearance.imgSearch.HeadLine2</item>
-        <item name="backgroundTint">@color/selected_button</item>
+        <item name="android:textColor">@color/selected_button_text</item>
+        <item name="android:stateListAnimator">@null</item>
     </style>
 
     <style name="Widget.Custom.IconButton" parent="Widget.Material3.Button.IconButton">
         <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
         <item name="android:minWidth">0dp</item>
-        <item name="backgroundTint">@android:color/white</item>
+        <item name="backgroundTint">?colorOnPrimary</item>
         <item name="iconTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="Widget.Custom.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
+        <item name="boxStrokeColor">@color/color_light_pink</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxBackgroundColor">?colorOnPrimary</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="endIconTint">?colorOnPrimarySurface</item>
+        <item name="elevation">0dp</item>
+        <item name="android:textColorHint">?colorOnSecondary</item>
     </style>
 </resources>
