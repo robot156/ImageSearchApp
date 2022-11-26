@@ -89,7 +89,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbar"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <FrameLayout
                 android:id="@+id/fl_empty_icon"
@@ -119,9 +119,10 @@
 
             <TextView
                 android:id="@+id/tv_empty_description"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
+                android:gravity="center"
                 android:text="@string/image_keep_empty"
                 android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
                 android:textColor="@color/color_gray"

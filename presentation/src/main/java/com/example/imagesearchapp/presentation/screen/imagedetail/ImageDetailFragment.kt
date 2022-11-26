@@ -12,9 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.databinding.FragmentImageDetailBinding
 import com.example.imagesearchapp.presentation.screen.DataBindingFragment
-import com.example.imagesearchapp.presentation.utils.EventObserver
+import com.example.imagesearchapp.presentation.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.dmoral.toasty.Toasty
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.launch
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -51,21 +54,31 @@ class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.lay
     }
 
     private fun initObserver() {
-        imageDetailViewModel.saveToAlbum.observe(viewLifecycleOwner, EventObserver {
-            requestStoragePermission()
-        })
+        launchAndRepeatWithViewLifecycle {
+            launch {
+                imageDetailViewModel.saveToAlbum.collect {
+                    requestStoragePermission()
+                }
+            }
 
-        imageDetailViewModel.saveComplete.observe(viewLifecycleOwner, EventObserver {
-            Toasty.success(requireContext(), resources.getString(R.string.detail_success), Toasty.LENGTH_SHORT, false).show()
-        })
+            launch {
+                imageDetailViewModel.saveComplete.collect {
+                    Toasty.success(requireContext(), resources.getString(R.string.detail_success), Toasty.LENGTH_SHORT, false).show()
+                }
+            }
 
-        imageDetailViewModel.saveFail.observe(viewLifecycleOwner, EventObserver {
-            Toasty.error(requireContext(), resources.getString(R.string.detail_fail), Toasty.LENGTH_SHORT, false).show()
-        })
+            launch {
+                imageDetailViewModel.saveFail.collect {
+                    Toasty.error(requireContext(), resources.getString(R.string.detail_fail), Toasty.LENGTH_SHORT, false).show()
+                }
+            }
 
-        imageDetailViewModel.isLoading.observe(viewLifecycleOwner, Observer {
-            if (it) showLoadingDialog() else hideLoadingDialog()
-        })
+            launch {
+                imageDetailViewModel.isLoading.collect {
+                    if (it) showLoadingDialog() else hideLoadingDialog()
+                }
+            }
+        }
     }
 
     @AfterPermissionGranted(STORAGE_PERMISSION_REQUEST_CODE)

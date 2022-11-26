@@ -59,7 +59,6 @@ dependencies {
     //Android Lifecycle
     implementation(Libraries.AndroidX.Lifecycle.runtime)
     implementation(Libraries.AndroidX.Lifecycle.viewModel)
-    implementation(Libraries.AndroidX.Lifecycle.liveData)
     implementation(Libraries.AndroidX.Lifecycle.savedState)
     implementation(Libraries.AndroidX.Lifecycle.service)
     kapt(Libraries.AndroidX.Lifecycle.compiler)

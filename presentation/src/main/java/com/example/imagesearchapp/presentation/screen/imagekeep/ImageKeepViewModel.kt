@@ -1,6 +1,7 @@
 package com.example.imagesearchapp.presentation.screen.imagekeep
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
 import androidx.paging.map
@@ -8,9 +9,11 @@ import com.example.imagesearchapp.domain.usecase.unsplashimage.imagekeep.GetKeep
 import com.example.imagesearchapp.domain.utils.data
 import com.example.imagesearchapp.presentation.model.UnsplashImageItem
 import com.example.imagesearchapp.presentation.model.mapToItem
-import com.example.imagesearchapp.presentation.utils.Event
+import com.example.imagesearchapp.presentation.utils.Const.EVENT_EXTRA_BUFFER
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -37,20 +40,20 @@ class ImageKeepViewModel @Inject constructor(
             }
         }.cachedIn(viewModelScope)
 
-    private val _isKeepImageEmpty = MutableLiveData<Boolean>(false)
-    val isKeepImageEmpty: LiveData<Boolean>
-        get() = _isKeepImageEmpty
+    private val _isKeepImageEmpty = MutableStateFlow<Boolean>(false)
+    val isKeepImageEmpty: StateFlow<Boolean> = _isKeepImageEmpty
 
-    private val _navigateToDetail = MutableLiveData<Event<UnsplashImageItem>>()
-    val navigateToDetail: LiveData<Event<UnsplashImageItem>>
-        get() = _navigateToDetail
+    private val _navigateToDetail = MutableSharedFlow<UnsplashImageItem>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val navigateToDetail: SharedFlow<UnsplashImageItem> = _navigateToDetail
 
     private fun setKeepImageEmpty(isEmpty: Boolean) {
         _isKeepImageEmpty.value = isEmpty
     }
 
     fun navigateToDetail(imageItem: UnsplashImageItem) {
-        _navigateToDetail.value = Event(imageItem)
+        viewModelScope.launch {
+            _navigateToDetail.emit(imageItem)
+        }
     }
 }
 

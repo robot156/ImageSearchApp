@@ -5,8 +5,6 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,12 +14,14 @@ import com.example.imagesearchapp.presentation.adapter.SearchUnsplashImageAdapte
 import com.example.imagesearchapp.presentation.adapter.UnsplashImageLoadAdapter
 import com.example.imagesearchapp.presentation.databinding.FragmentImageSearchListBinding
 import com.example.imagesearchapp.presentation.screen.DataBindingFragment
-import com.example.imagesearchapp.presentation.utils.EventObserver
 import com.example.imagesearchapp.presentation.utils.hideKeyboard
+import com.example.imagesearchapp.presentation.utils.launchAndRepeatWithViewLifecycle
 import com.example.imagesearchapp.presentation.utils.safeNavigate
 import com.example.imagesearchapp.presentation.utils.setOnMenuItemSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBinding>(R.layout.fragment_image_search_list) {
@@ -104,27 +104,37 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
     }
 
     private fun initObserver() {
-        lifecycleScope.launchWhenCreated {
-            imageSearchListViewModel.images.collectLatest {
-                searchUnsplashImageAdapter.submitData(it)
+        launchAndRepeatWithViewLifecycle {
+            launch {
+                imageSearchListViewModel.images.collectLatest {
+                    searchUnsplashImageAdapter.submitData(it)
+                }
+            }
+
+            launch {
+                imageSearchListViewModel.isSearchMenuVisible.filter { !it }.collect {
+                    dataBinding.tietKeyword.hideKeyboard(true)
+                }
+            }
+
+            launch {
+                imageSearchListViewModel.clickRefresh.collect {
+                    searchUnsplashImageAdapter.retry()
+                }
+            }
+
+            launch {
+                imageSearchListViewModel.navigateToDetail.collect {
+                    findNavController().safeNavigate(ImageSearchListFragmentDirections.actionImageSearchListFragmentToDetailFragment(imageSearchListViewModel.keyword.value, it))
+                }
+            }
+
+            launch {
+                imageSearchListViewModel.navigateToBack.collect {
+                    findNavController().navigateUp()
+                }
             }
         }
-
-        imageSearchListViewModel.isSearchMenuVisible.observe(viewLifecycleOwner, Observer {
-            if (!it) dataBinding.tietKeyword.hideKeyboard(true)
-        })
-
-        imageSearchListViewModel.clickRefresh.observe(viewLifecycleOwner, EventObserver {
-             searchUnsplashImageAdapter.retry()
-        })
-
-        imageSearchListViewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
-            findNavController().safeNavigate(ImageSearchListFragmentDirections.actionImageSearchListFragmentToDetailFragment(imageSearchListViewModel.keyword.value, it))
-        })
-
-        imageSearchListViewModel.navigateToBack.observe(viewLifecycleOwner, EventObserver {
-            findNavController().navigateUp()
-        })
 
         searchUnsplashImageAdapter.addLoadStateListener { loadState ->
             dataBinding.apply {

@@ -5,16 +5,12 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.databinding.FragmentImageSearchBinding
 import com.example.imagesearchapp.presentation.screen.DataBindingFragment
-import com.example.imagesearchapp.presentation.utils.DebounceEditTextListener
-import com.example.imagesearchapp.presentation.utils.EventObserver
-import com.example.imagesearchapp.presentation.utils.hideKeyboard
-import com.example.imagesearchapp.presentation.utils.safeNavigate
+import com.example.imagesearchapp.presentation.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -62,18 +58,26 @@ class ImageSearchFragment : DataBindingFragment<FragmentImageSearchBinding>(R.la
     }
 
     private fun initObserver() {
-        imageSearchViewModel.navigateToSearchList.observe(viewLifecycleOwner, EventObserver { keyword ->
-            lifecycleScope.launch {
-                dataBinding.root.hideKeyboard().also {
-                    delay(100)
+        launchAndRepeatWithViewLifecycle {
+            launch {
+                imageSearchViewModel.keyword.collect {
+                    dataBinding.btnSearch.isEnabled = !it.isNullOrEmpty()
+                }
+            }
+
+            launch {
+                imageSearchViewModel.navigateToSearchList.collect { keyword ->
+                    dataBinding.root.hideKeyboard().also { delay(100) }
                     findNavController().safeNavigate(ImageSearchFragmentDirections.actionImageSearchFragmentToImageSearchListFragment(keyword))
                 }
             }
-        })
 
-        imageSearchViewModel.navigateToKeep.observe(viewLifecycleOwner, EventObserver {
-            findNavController().safeNavigate(ImageSearchFragmentDirections.actionImageSearchFragmentToImageKeepFragment())
-        })
+            launch {
+                imageSearchViewModel.navigateToKeep.collect {
+                    findNavController().safeNavigate(ImageSearchFragmentDirections.actionImageSearchFragmentToImageKeepFragment())
+                }
+            }
+        }
     }
 
     override fun onResume() {

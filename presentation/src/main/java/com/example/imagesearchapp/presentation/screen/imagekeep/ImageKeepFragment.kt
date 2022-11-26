@@ -3,7 +3,6 @@ package com.example.imagesearchapp.presentation.screen.imagekeep
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
@@ -11,7 +10,7 @@ import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.adapter.KeepUnsplashImageAdapter
 import com.example.imagesearchapp.presentation.databinding.FragmentImageKeepBinding
 import com.example.imagesearchapp.presentation.screen.DataBindingFragment
-import com.example.imagesearchapp.presentation.utils.EventObserver
+import com.example.imagesearchapp.presentation.utils.launchAndRepeatWithViewLifecycle
 import com.example.imagesearchapp.presentation.utils.safeNavigate
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -70,13 +69,12 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
     }
 
     private fun initObserver() {
-        lifecycleScope.launchWhenStarted {
+        launchAndRepeatWithViewLifecycle {
             launch {
                 imageKeepViewModel.keepImages.collectLatest {
                     imageKeepAdapter.submitData(it)
                 }
             }
-
             launch {
                 imageKeepAdapter
                     .loadStateFlow
@@ -89,11 +87,13 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
                         }
                     }
             }
-        }
 
-        imageKeepViewModel.navigateToDetail.observe(viewLifecycleOwner, EventObserver {
-            findNavController().safeNavigate(ImageKeepFragmentDirections.actionImageKeepFragmentToImageDetailFragment(keyword = it.keyword, imageData = it))
-        })
+            launch {
+                imageKeepViewModel.navigateToDetail.collect {
+                    findNavController().safeNavigate(ImageKeepFragmentDirections.actionImageKeepFragmentToImageDetailFragment(keyword = it.keyword, imageData = it))
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

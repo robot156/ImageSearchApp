@@ -27,7 +27,6 @@ object Libraries {
             const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.lifecycle}"
             const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.AndroidX.lifecycle}"
             const val savedState = "androidx.lifecycle:lifecycle-viewmodel-savedstate:${Versions.AndroidX.lifecycle}"
-            const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.lifecycle}"
             const val service = "androidx.lifecycle:lifecycle-service:${Versions.AndroidX.lifecycle}"
             const val process = "androidx.lifecycle:lifecycle-process:${Versions.AndroidX.lifecycle}"
             const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.AndroidX.lifecycle}"// For Kotlin use kapt instead of annotationProcessor
