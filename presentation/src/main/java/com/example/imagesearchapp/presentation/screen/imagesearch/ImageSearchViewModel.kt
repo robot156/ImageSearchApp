@@ -1,8 +1,12 @@
 package com.example.imagesearchapp.presentation.screen.imagesearch
 
 import androidx.lifecycle.*
-import com.example.imagesearchapp.presentation.utils.Event
+import com.example.imagesearchapp.presentation.utils.Const.EVENT_EXTRA_BUFFER
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -10,45 +14,31 @@ class ImageSearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _keyword = savedStateHandle.getLiveData(KEY_KEYWORD, "")
-    val keyword: LiveData<String>
-        get() = _keyword
+    val keyword = savedStateHandle.getStateFlow<String?>(KEY_KEYWORD, null)
 
-    private val _enabledInputKeyword = MediatorLiveData<Boolean>()
-    val enabledInputKeyword: LiveData<Boolean>
-        get() = _enabledInputKeyword
+    private val _navigateToSearchList = MutableSharedFlow<String>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val navigateToSearchList: SharedFlow<String> = _navigateToSearchList
 
-    private val _navigateToSearchList = MutableLiveData<Event<String>>()
-    val navigateToSearchList: LiveData<Event<String>>
-        get() = _navigateToSearchList
-
-    private val _navigateToKeep = MutableLiveData<Event<Unit>>()
-    val navigateToKeep: LiveData<Event<Unit>>
-        get() = _navigateToKeep
-
-    init {
-        with(_enabledInputKeyword) {
-            addSource(keyword) {
-                value = isValidEnterState()
-            }
-        }
-    }
-
-    private fun isValidEnterState() = !keyword.value.isNullOrEmpty() && !keyword.value.isNullOrBlank()
+    private val _navigateToKeep = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val navigateToKeep: SharedFlow<Unit> = _navigateToKeep
 
     fun setKeyword(keyword: String?) {
-        if (this.keyword.value == keyword || keyword == null) {
+        if (this.keyword.value == keyword) {
             return
         }
         savedStateHandle.set(KEY_KEYWORD, keyword)
     }
 
     fun navigateToSearchList(keyword: String?) {
-        _navigateToSearchList.value = Event(keyword!!)
+        viewModelScope.launch {
+            _navigateToSearchList.emit(keyword!!)
+        }
     }
 
     fun navigateToKeep() {
-        _navigateToKeep.value = Event(Unit)
+        viewModelScope.launch {
+            _navigateToKeep.emit(Unit)
+        }
     }
 
     companion object {

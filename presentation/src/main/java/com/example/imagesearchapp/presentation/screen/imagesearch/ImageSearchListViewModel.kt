@@ -1,6 +1,8 @@
 package com.example.imagesearchapp.presentation.screen.imagesearch
 
-import androidx.lifecycle.*
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.insertSeparators
@@ -9,10 +11,12 @@ import com.example.imagesearchapp.domain.usecase.unsplashimage.imagesearch.GetSe
 import com.example.imagesearchapp.domain.utils.data
 import com.example.imagesearchapp.presentation.model.UnsplashImageItem
 import com.example.imagesearchapp.presentation.model.mapToItem
-import com.example.imagesearchapp.presentation.utils.Event
+import com.example.imagesearchapp.presentation.utils.Const.EVENT_EXTRA_BUFFER
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -23,8 +27,7 @@ class ImageSearchListViewModel @Inject constructor(
 
     private val clearListCh = Channel<Unit>(Channel.CONFLATED)
 
-    val keyword = savedStateHandle.getLiveData<String>(KEY_KEYWORD).asFlow()
-        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
+    val keyword = savedStateHandle.getStateFlow<String?>(KEY_KEYWORD, null)
 
     val images: Flow<PagingData<UnsplashImageItem>> = merge(
         clearListCh.receiveAsFlow().map { PagingData.empty() },
@@ -42,25 +45,20 @@ class ImageSearchListViewModel @Inject constructor(
         }
     ).cachedIn(viewModelScope)
 
-    private val _isSearchMenuVisible = MutableLiveData<Boolean>(false)
-    val isSearchMenuVisible: LiveData<Boolean>
-        get() = _isSearchMenuVisible
+    private val _isSearchMenuVisible = MutableStateFlow<Boolean>(false)
+    val isSearchMenuVisible: StateFlow<Boolean> = _isSearchMenuVisible
 
-    private val _isSearchImageEmpty = MutableLiveData<Boolean>(false)
-    val isSearchImageEmpty: LiveData<Boolean>
-        get() = _isSearchImageEmpty
+    private val _isSearchImageEmpty = MutableStateFlow<Boolean>(false)
+    val isSearchImageEmpty: StateFlow<Boolean> = _isSearchImageEmpty
 
-    private val _clickRefresh = MutableLiveData<Event<Unit>>()
-    val clickRefresh: LiveData<Event<Unit>>
-        get() = _clickRefresh
+    private val _clickRefresh = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val clickRefresh: SharedFlow<Unit> = _clickRefresh
 
-    private val _navigateToDetail = MutableLiveData<Event<UnsplashImageItem>>()
-    val navigateToDetail: LiveData<Event<UnsplashImageItem>>
-        get() = _navigateToDetail
+    private val _navigateToDetail = MutableSharedFlow<UnsplashImageItem>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val navigateToDetail: SharedFlow<UnsplashImageItem> = _navigateToDetail
 
-    private val _navigateToBack = MutableLiveData<Event<Unit>>()
-    val navigateToBack: LiveData<Event<Unit>>
-        get() = _navigateToBack
+    private val _navigateToBack = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
+    val navigateToBack: SharedFlow<Unit> = _navigateToBack
 
     private fun setListEmpty(isEmpty: Boolean) {
         _isSearchImageEmpty.value = isEmpty
@@ -80,15 +78,21 @@ class ImageSearchListViewModel @Inject constructor(
     }
 
     fun clickRefresh() {
-        _clickRefresh.value = Event(Unit)
+        viewModelScope.launch {
+            _clickRefresh.emit(Unit)
+        }
     }
 
     fun navigateToDetail(imageItem: UnsplashImageItem) {
-        _navigateToDetail.value = Event(imageItem)
+        viewModelScope.launch {
+            _navigateToDetail.emit(imageItem)
+        }
     }
 
     fun navigateToBack() {
-        _navigateToBack.value = Event(Unit)
+        viewModelScope.launch {
+            _navigateToBack.emit(Unit)
+        }
     }
 
     companion object {
