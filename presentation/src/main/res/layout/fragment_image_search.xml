@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.ImageSearchApp.Search"
+        tools:background="@android:color/white"
         tools:context=".screen.imagesearch.ImageSearchFragment">
 
         <androidx.core.widget.NestedScrollView
@@ -53,30 +54,26 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:src="@drawable/ic_unsplash"
+                    android:tint="?colorOnSecondary"
                     app:layout_constraintBottom_toTopOf="@id/til_keyword"
                     app:layout_constraintEnd_toEndOf="@id/til_keyword"
                     app:layout_constraintStart_toStartOf="@id/til_keyword"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:tint="@android:color/black" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_keyword"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.Custom.TextInputLayoutStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="36dp"
                     android:layout_marginTop="20dp"
-                    android:elevation="0dp"
-                    app:boxBackgroundColor="@android:color/white"
-                    app:boxStrokeColor="@color/color_light_pink"
-                    app:boxStrokeWidth="1dp"
-                    app:boxStrokeWidthFocused="1dp"
-                    app:endIconMode="clear_text"
                     app:layout_constraintBottom_toTopOf="@id/btn_search"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/iv_title"
-                    app:shapeAppearance="@style/ShapeAppearance.LargeComponent">
+                    tools:textColorHint="@android:color/black">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_keyword"
@@ -89,7 +86,8 @@
                         android:minHeight="56dp"
                         android:padding="12dp"
                         android:text="@{viewModel.keyword != null ? viewModel.keyword : ``}"
-                        android:textColor="@android:color/black" />
+                        android:textColor="?colorOnSecondary"
+                        tools:textColor="@android:color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -104,7 +102,8 @@
                     app:layout_constraintEnd_toEndOf="@id/til_keyword"
                     app:layout_constraintStart_toStartOf="@id/til_keyword"
                     app:layout_constraintTop_toBottomOf="@id/til_keyword"
-                    app:onSingleClick="@{()-> viewModel.navigateToSearchList(viewModel.keyword)}" />
+                    app:onSingleClick="@{()-> viewModel.navigateToSearchList(viewModel.keyword)}"
+                    tools:textColor="@android:color/black" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

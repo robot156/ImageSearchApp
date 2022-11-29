@@ -79,16 +79,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_keyword"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.Custom.TextInputLayoutStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:elevation="0dp"
-                    app:boxBackgroundColor="@android:color/white"
-                    app:boxStrokeColor="@color/color_light_pink"
-                    app:boxStrokeWidth="1dp"
-                    app:boxStrokeWidthFocused="1dp"
-                    app:endIconMode="clear_text"
-                    app:shapeAppearance="@style/ShapeAppearance.LargeComponent">
+                    app:endIconTint="?colorOnPrimarySurface"
+                    android:layout_height="match_parent">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_keyword"
@@ -101,7 +95,8 @@
                         android:inputType="text"
                         android:maxLines="1"
                         android:padding="16dp"
-                        android:text="@{viewModel.keyword}" />
+                        android:text="@{viewModel.keyword}"
+                        android:textColor="?colorOnSecondary" />
                 </com.google.android.material.textfield.TextInputLayout>
             </FrameLayout>
 
@@ -131,6 +126,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/list_error"
+            android:textColor="?colorOnSecondary"
             android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
             android:visibility="@{isError ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -147,11 +143,11 @@
             android:layout_marginTop="10dp"
             android:onClick="@{() -> viewModel.clickRefresh()}"
             android:text="@string/list_retry"
-            android:textColor="@color/color_gray"
+            android:textColor="?colorOnSecondary"
             android:visibility="@{isError ? View.VISIBLE : View.GONE}"
-            app:backgroundTint="@android:color/white"
+            app:backgroundTint="?colorOnPrimary"
             app:icon="@drawable/ic_refresh"
-            app:iconTint="@color/color_light_pink"
+            app:iconTint="?colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/tv_state_error"
             app:layout_constraintStart_toStartOf="@id/tv_state_error"
@@ -187,7 +183,7 @@
                 <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/color_light_pink"
+                    android:background="?colorPrimary"
                     app:shapeAppearance="@style/ShapeAppearance.LargeComponent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -206,7 +202,7 @@
                 android:gravity="center"
                 android:text="@string/list_empty_result"
                 android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
-                android:textColor="@color/color_gray"
+                android:textColor="?colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@id/btn_back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -219,10 +215,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/list_back"
-                android:textColor="@color/color_gray"
-                app:backgroundTint="@android:color/white"
+                android:textColor="?colorOnSecondary"
+                app:backgroundTint="?colorOnPrimary"
                 app:icon="@drawable/ic_back"
-                app:iconTint="@color/color_light_pink"
+                app:iconTint="?colorPrimary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

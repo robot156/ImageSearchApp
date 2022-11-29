@@ -3,8 +3,14 @@
 
     <color name="color_pink">#EC407A</color>
     <color name="color_light_pink">#E69A8D</color>
-    <color name="color_gray">#787878</color>
-    <color name="color_light_gray">#BABABA</color>
+    <color name="color_dark_pink">#89473e</color>
 
-    <color name="color_959595">#959595</color>
+    <color name="color_gray">#787878</color>
+    <color name="color_light_gray">#EEEEEE</color>
+    <color name="color_dark_gray">#3E3E3E</color>
+
+    <color name="color_light_dark">#1B1B1B</color>
+
+    <!-- TextInputLayout Default Stroke Color Setting -->
+    <color name="mtrl_textinput_default_box_stroke_color">#E69A8D</color>
 </resources>

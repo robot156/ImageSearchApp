@@ -3,23 +3,23 @@
     <style name="Theme.ImageSearchApp" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/color_pink</item>
-        <item name="colorPrimaryVariant">@color/color_light_pink</item>
-        <item name="colorOnPrimary">@android:color/white</item>
+        <item name="colorPrimaryVariant">@color/color_dark_pink</item>
+        <item name="colorOnPrimary">@color/color_light_dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/color_pink</item>
-        <item name="colorSecondaryVariant">@color/color_light_pink</item>
-        <item name="colorOnSecondary">@color/color_light_dark</item>
+        <item name="colorSecondaryVariant">@color/color_dark_pink</item>
+        <item name="colorOnSecondary">@android:color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@android:color/white</item>
-        <item name="colorOnSurface">@color/color_light_gray</item>
-        <item name="colorOnPrimarySurface">@color/color_gray</item>
+        <item name="android:colorBackground">@color/color_light_dark</item>
+        <item name="colorOnSurface">@color/color_dark_gray</item>
+        <item name="colorOnPrimarySurface">@color/color_light_gray</item>
     </style>
 
     <style name="Theme.ImageSearchApp.Search" parent="Theme.ImageSearchApp">
-        <item name="colorPrimary">@color/color_light_pink</item>
+        <item name="colorPrimary">@color/color_dark_pink</item>
         <item name="colorSecondary">@color/color_pink</item>
-        <item name="actionMenuTextColor">@color/color_light_pink</item>
+        <item name="actionMenuTextColor">@color/color_dark_pink</item>
     </style>
 </resources>
