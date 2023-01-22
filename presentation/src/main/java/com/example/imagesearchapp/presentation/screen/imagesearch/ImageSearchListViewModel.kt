@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.paging.insertSeparators
 import androidx.paging.map
 import com.example.imagesearchapp.domain.usecase.unsplashimage.imagesearch.GetSearchUnsplashImagesUseCase
 import com.example.imagesearchapp.domain.utils.data
@@ -35,21 +34,12 @@ class ImageSearchListViewModel @Inject constructor(
             getSearchUnsplashImagesUseCase(GetSearchUnsplashImagesUseCase.Params(query = keyword))
                 .map { result ->
                     result.data!!.map { data -> data.mapToItem() }
-                }.map { pagingData ->
-                    pagingData.insertSeparators { before: UnsplashImageItem?, after: UnsplashImageItem? ->
-                        setListEmpty(before == null && after == null)
-                        null
-                    }
                 }
-                .distinctUntilChanged()
         }
     ).cachedIn(viewModelScope)
 
     private val _isSearchMenuVisible = MutableStateFlow<Boolean>(false)
     val isSearchMenuVisible: StateFlow<Boolean> = _isSearchMenuVisible
-
-    private val _isSearchImageEmpty = MutableStateFlow<Boolean>(false)
-    val isSearchImageEmpty: StateFlow<Boolean> = _isSearchImageEmpty
 
     private val _clickRefresh = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
     val clickRefresh: SharedFlow<Unit> = _clickRefresh
@@ -59,10 +49,6 @@ class ImageSearchListViewModel @Inject constructor(
 
     private val _navigateToBack = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
     val navigateToBack: SharedFlow<Unit> = _navigateToBack
-
-    private fun setListEmpty(isEmpty: Boolean) {
-        _isSearchImageEmpty.value = isEmpty
-    }
 
     fun setKeyword(keyword: String) {
         if (this.keyword.value == keyword) {

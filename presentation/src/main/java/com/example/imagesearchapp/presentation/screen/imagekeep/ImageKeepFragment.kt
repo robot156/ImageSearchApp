@@ -76,8 +76,7 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
                 }
             }
             launch {
-                imageKeepAdapter
-                    .loadStateFlow
+                imageKeepAdapter.loadStateFlow
                     .distinctUntilChangedBy { it.refresh }
                     .collect { loadState ->
                         with(dataBinding) {

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -20,6 +21,7 @@ import com.example.imagesearchapp.presentation.utils.safeNavigate
 import com.example.imagesearchapp.presentation.utils.setOnMenuItemSingleClickListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
@@ -134,13 +136,19 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
                     findNavController().navigateUp()
                 }
             }
-        }
 
-        searchUnsplashImageAdapter.addLoadStateListener { loadState ->
-            dataBinding.apply {
-                isSuccess = loadState.source.refresh is LoadState.NotLoading
-                isLoading = loadState.source.refresh is LoadState.Loading
-                isError = loadState.source.refresh is LoadState.Error
+            launch {
+                searchUnsplashImageAdapter.loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .collect { loadState ->
+                        with(dataBinding) {
+                            isSuccess = loadState.source.refresh is LoadState.NotLoading
+                            isLoading = loadState.source.refresh is LoadState.Loading
+                            isError = loadState.source.refresh is LoadState.Error
+
+                            clEmptySearchResult.isVisible = loadState.refresh is LoadState.NotLoading && searchUnsplashImageAdapter.itemCount == 0
+                        }
+                    }
             }
         }
     }
