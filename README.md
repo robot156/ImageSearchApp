@@ -8,7 +8,7 @@ unsplash api를 이용해서 만든 MVVM 샘플 앱입니다.
 - Navigation
 - Paging3
 - ViewModel
-- LiveData
+- StateFlow
 - Glide
 - Kotlin_serialization
 - Retrofit
