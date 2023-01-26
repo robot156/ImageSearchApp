@@ -12,8 +12,6 @@ unsplash api를 이용해서 만든 MVVM 샘플 앱입니다.
 - Glide
 - Kotlin_serialization
 - Retrofit
-- Timber
-- Toasty
 
 ## 주요 화면
 
