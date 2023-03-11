@@ -1,6 +1,5 @@
 package com.example.imagesearchapp.data.di
 
-import android.content.Context
 import com.example.imagesearchapp.data.source.file.FileLocalDataSource
 import com.example.imagesearchapp.data.source.file.FileRepositoryImpl
 import com.example.imagesearchapp.data.source.file.local.FileLocalDataSourceImpl
@@ -9,55 +8,35 @@ import com.example.imagesearchapp.data.source.unsplashimage.UnsplashImageRemoteD
 import com.example.imagesearchapp.data.source.unsplashimage.UnsplashImageRepositoryImpl
 import com.example.imagesearchapp.data.source.unsplashimage.imagekeep.local.UnsplashImageLocalDataSourceImpl
 import com.example.imagesearchapp.data.source.unsplashimage.imagesearch.remote.UnsplashImageRemoteDataSourceImpl
-import com.example.imagesearchapp.data.utils.database.ImageSearchDataBase
-import com.example.imagesearchapp.data.utils.file.FileUtil
-import com.example.imagesearchapp.data.utils.service.ServiceApi
 import com.example.imagesearchapp.domain.usecase.file.FileRepository
 import com.example.imagesearchapp.domain.usecase.unsplashimage.UnsplashImageRepository
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-class DataModule {
+internal abstract class DataModule {
 
     @Singleton
-    @Provides
-    internal fun providerUnsplashImageRemoteDataSource(serviceApi: ServiceApi): UnsplashImageRemoteDataSource {
-        return UnsplashImageRemoteDataSourceImpl(serviceApi)
-    }
+    @Binds
+    internal abstract fun bindUnsplashImageRemoteDataSource(unsplashImageRemoteDataSourceImpl: UnsplashImageRemoteDataSourceImpl): UnsplashImageRemoteDataSource
 
     @Singleton
-    @Provides
-    internal fun providerUnsplashImageLocalDataSource(imageSearchDataBase: ImageSearchDataBase): UnsplashImageLocalDataSource {
-        return UnsplashImageLocalDataSourceImpl(imageSearchDataBase)
-    }
+    @Binds
+    internal abstract fun bindUnsplashImageLocalDataSource(unsplashImageLocalDataSourceImpl: UnsplashImageLocalDataSourceImpl): UnsplashImageLocalDataSource
 
     @Singleton
-    @Provides
-    internal fun providerUnsplashImageRepository(unsplashImageLocalDataSource: UnsplashImageLocalDataSource, unsplashImageRemoteDataSource: UnsplashImageRemoteDataSource): UnsplashImageRepository {
-        return UnsplashImageRepositoryImpl(unsplashImageLocalDataSource, unsplashImageRemoteDataSource)
-    }
+    @Binds
+    internal abstract fun bindUnsplashImageRepository(unsplashImageRepositoryImpl: UnsplashImageRepositoryImpl): UnsplashImageRepository
 
     @Singleton
-    @Provides
-    internal fun providerFileLocalDataSource(fileUtil: FileUtil): FileLocalDataSource {
-        return FileLocalDataSourceImpl(fileUtil)
-    }
+    @Binds
+    internal abstract fun bindFileLocalDataSource(fileLocalDataSourceImpl: FileLocalDataSourceImpl): FileLocalDataSource
 
     @Singleton
-    @Provides
-    internal fun providerFileRepository(fileLocalDataSource: FileLocalDataSource): FileRepository {
-        return FileRepositoryImpl(fileLocalDataSource)
-    }
-
-    @Singleton
-    @Provides
-    internal fun provideFileUtil(@ApplicationContext context: Context): FileUtil {
-        return FileUtil(context)
-    }
+    @Binds
+    internal abstract fun bindFileRepository(fileRepositoryImpl: FileRepositoryImpl) : FileRepository
 }

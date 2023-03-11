@@ -4,9 +4,11 @@ import android.Manifest
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.databinding.FragmentImageDetailBinding
@@ -14,15 +16,16 @@ import com.example.imagesearchapp.presentation.screen.DataBindingFragment
 import com.example.imagesearchapp.presentation.utils.launchAndRepeatWithViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import es.dmoral.toasty.Toasty
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
+import pub.devrel.easypermissions.PermissionRequest
 import java.io.ByteArrayOutputStream
 import java.io.File
 
 @AndroidEntryPoint
-class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.layout.fragment_image_detail), EasyPermissions.PermissionCallbacks {
+class ImageDetailFragment : DataBindingFragment<FragmentImageDetailBinding>(R.layout.fragment_image_detail), EasyPermissions.PermissionCallbacks {
 
     private val imageDetailViewModel: ImageDetailViewModel by viewModels()
 
@@ -69,37 +72,40 @@ class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.lay
                     Toasty.error(requireContext(), resources.getString(R.string.detail_fail), Toasty.LENGTH_SHORT, false).show()
                 }
             }
-
-            launch {
-                imageDetailViewModel.isLoading.collect {
-                    if (it) showLoadingDialog() else hideLoadingDialog()
-                }
-            }
         }
     }
 
-    @AfterPermissionGranted(STORAGE_PERMISSION_REQUEST_CODE)
     private fun requestStoragePermission() {
-        if (EasyPermissions.hasPermissions(requireContext(), *STORAGE_PERMISSION)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            captureImage()
+        } else if (EasyPermissions.hasPermissions(requireContext(), *getStoragePermission())) {
+            captureImage()
+        } else {
+            EasyPermissions.requestPermissions(
+                PermissionRequest.Builder(this, STORAGE_PERMISSION_REQUEST_CODE, *getStoragePermission())
+                    .setRationale(R.string.detail_storage_description)
+                    .setPositiveButtonText(R.string.all_confirm)
+                    .setNegativeButtonText(R.string.all_cancel)
+                    .setTheme(R.style.Theme_ImageSearchApp_Search)
+                    .build()
+            )
+        }
+    }
+
+    private fun captureImage() {
+        showLoadingDialog()
+        lifecycleScope.launch {
+            delay(100)
             val byteArray = dataBinding.ivUnsplashImage.let { view ->
                 createByteArrayFromView(view, view.width, view.height)
             }
 
-            imageDetailViewModel.apply {
-                setLoading(true)
-                imageSave(
-                    byteArray = byteArray,
-                    imagePath = requireContext().cacheDir.path + File.separator + "image",
-                    fileName = "IMG_${System.currentTimeMillis()}.png"
-                )
-            }
-        } else {
-            EasyPermissions.requestPermissions(
-                this,
-                getString(R.string.detail_storage_description),
-                STORAGE_PERMISSION_REQUEST_CODE,
-                *STORAGE_PERMISSION
+            imageDetailViewModel.imageSave(
+                byteArray = byteArray,
+                imagePath = requireContext().cacheDir.path + File.separator + "image",
+                fileName = "IMG_${System.currentTimeMillis()}.png"
             )
+            hideLoadingDialog()
         }
     }
 
@@ -109,12 +115,13 @@ class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.lay
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) = Unit
+
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog
                 .Builder(this)
-                .setNegativeButton(R.string.detail_cancel)
-                .setPositiveButton(R.string.detail_confirm)
+                .setNegativeButton(R.string.all_cancel)
+                .setPositiveButton(R.string.all_confirm)
                 .setTitle(R.string.detail_permission)
                 .setRationale(R.string.detail_storage_description)
                 .build()
@@ -137,7 +144,8 @@ class ImageDetailFragment: DataBindingFragment<FragmentImageDetailBinding>(R.lay
     }
 
     companion object {
-        private val STORAGE_PERMISSION = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        fun getStoragePermission() = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
         private const val STORAGE_PERMISSION_REQUEST_CODE = 121
     }
 }

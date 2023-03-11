@@ -24,11 +24,6 @@ class ImageKeepViewModel @Inject constructor(
     val keepImages = getKeepUnsplashImagesUseCase(Unit)
         .map { result -> result.data!!.map { it.mapToItem() } }
         .map { pagingData ->
-            pagingData.insertSeparators { before: UnsplashImageItem?, after: UnsplashImageItem? ->
-                setKeepImageEmpty(before == null && after == null)
-                null
-            }
-        }.map { pagingData ->
             pagingData.map { KeepUnsplashImageItemUiModel.KeepUnsplashImageItem(it) }
         }.map { pagingData ->
             pagingData.insertSeparators { before: KeepUnsplashImageItemUiModel.KeepUnsplashImageItem?, after: KeepUnsplashImageItemUiModel.KeepUnsplashImageItem? ->
@@ -40,15 +35,8 @@ class ImageKeepViewModel @Inject constructor(
             }
         }.cachedIn(viewModelScope)
 
-    private val _isKeepImageEmpty = MutableStateFlow<Boolean>(false)
-    val isKeepImageEmpty: StateFlow<Boolean> = _isKeepImageEmpty
-
     private val _navigateToDetail = MutableSharedFlow<UnsplashImageItem>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
     val navigateToDetail: SharedFlow<UnsplashImageItem> = _navigateToDetail
-
-    private fun setKeepImageEmpty(isEmpty: Boolean) {
-        _isKeepImageEmpty.value = isEmpty
-    }
 
     fun navigateToDetail(imageItem: UnsplashImageItem) {
         viewModelScope.launch {

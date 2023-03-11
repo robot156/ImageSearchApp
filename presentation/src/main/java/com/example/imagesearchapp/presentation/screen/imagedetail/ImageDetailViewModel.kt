@@ -40,9 +40,6 @@ class ImageDetailViewModel @Inject constructor(
     private val _saveFail = MutableSharedFlow<Unit>(0, EVENT_EXTRA_BUFFER, BufferOverflow.DROP_LATEST)
     val saveFail: SharedFlow<Unit> = _saveFail
 
-    private val _isLoading = MutableStateFlow<Boolean>(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
-
     init {
         viewModelScope.launch {
             _isKeepImage.value = unsplashImage
@@ -84,9 +81,7 @@ class ImageDetailViewModel @Inject constructor(
                     filePath = imagePath,
                     fileName = fileName
                 )
-            ).onEach {
-                setLoading(it is ResultState.Loading)
-            }.collect {
+            ).collect {
                 when (it) {
                     is ResultState.Loading -> return@collect
                     is ResultState.Success -> _saveComplete.emit(Unit)
@@ -94,10 +89,6 @@ class ImageDetailViewModel @Inject constructor(
                 }
             }
         }
-    }
-
-    fun setLoading(isLoading: Boolean) {
-        _isLoading.value = isLoading
     }
 
     companion object {

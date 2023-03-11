@@ -2,6 +2,7 @@ package com.example.imagesearchapp.presentation.screen.imagekeep
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
@@ -83,6 +84,8 @@ class ImageKeepFragment : DataBindingFragment<FragmentImageKeepBinding>(R.layout
                             isSuccess = loadState.source.refresh is LoadState.NotLoading
                             isLoading = loadState.source.refresh is LoadState.Loading
                             isError = loadState.source.refresh is LoadState.Error
+
+                            clEmptyStorage.isVisible = loadState.refresh is LoadState.NotLoading && imageKeepAdapter.itemCount == 0
                         }
                     }
             }

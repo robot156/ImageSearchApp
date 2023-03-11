@@ -92,7 +92,7 @@ class ImageSearchListFragment : DataBindingFragment<FragmentImageSearchListBindi
                 setOnMenuItemSingleClickListener {
                     when (it.itemId) {
                         R.id.menu_search -> {
-                            imageSearchListViewModel.setSearchMenuVisible(!(imageSearchListViewModel.isSearchMenuVisible.value ?: false))
+                            imageSearchListViewModel.setSearchMenuVisible(!(imageSearchListViewModel.isSearchMenuVisible.value))
                             true
                         }
                         else -> false

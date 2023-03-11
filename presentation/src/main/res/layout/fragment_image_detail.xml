@@ -121,9 +121,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_create_user"
-                    app:layout_constraintVertical_bias="1"
-                    app:strokeColor="@color/color_pink"
-                    app:strokeWidth="1dp" />
+                    app:layout_constraintVertical_bias="1" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_image_keep"
