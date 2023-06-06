@@ -30,6 +30,34 @@
 	* JSON 파싱 라이브러리
 * <b>Timber</b>
 
+<br/>
+
+## Build-Logic
+
+### Convention Plugins
+<img src="https://github.com/robot156/ImageSearchApp/assets/66992191/66c9ab0d-0f39-4179-b6fe-5e4eb2e82d32"/>
+
+`build-logic` 모듈에서는 공통으로 사용되는 라이브러리들을 커스텀 플러그인을 통해 정의합니다.</p>
+이를 통해 기존 `gradle.kts`들에서 반복되는 보일러플레이트를 줄이고 해당 라이브러리를 하나의 파일로 관리할 수 있습니다.</p>
+
+<br/>
+
+### Version Catalogs
+
+```toml
+[versions]
+androidxCore = "1.9.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+
+```
+
+`buildSrc` 폴더에서 코틀린 클래스로 관리하던 라이브러리 소스들을 `libs.toml`로 이전하였습니다.</p>
+`toml`의 직관적인 규칙을 통해 플러그인과 라이브러리를 간편하게 작성하고 관리할 수 있습니다.</p>
+
+<br/>
+
 ## Architecture OverView
 ![Architecture](https://user-images.githubusercontent.com/66992191/227775864-93339a3a-5e36-4655-9ae7-b25ad119a0ce.png)
 
