@@ -6,7 +6,7 @@ object Config {
     const val minSdk = 21
     const val targetSdk = 33
     const val compileSdk = 33
-    val javaCompileTarget = JavaVersion.VERSION_11
+    val javaCompileTarget = JavaVersion.VERSION_17
 
     private const val versionMajor = 1
     private const val versionMinor = 0

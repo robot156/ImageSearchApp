@@ -1,6 +1,6 @@
 plugins {
-    id("kotlin")
-    id("kotlin-kapt")
+    kotlin("jvm")
+    kotlin("kapt")
 }
 
 java {
@@ -10,13 +10,13 @@ java {
 
 dependencies {
     // Kotlin
-    implementation(Libraries.Kotlin.kotlin)
-    implementation(Libraries.Kotlin.coroutine)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinx.coroutines)
 
     // Paging
-    implementation(Libraries.AndroidX.Paging.common)
+    implementation(libs.androidx.paging.common)
 
     // Dagger2 ( DI )
-    implementation(Libraries.Dagger.hilt)
-    kapt(Libraries.Dagger.hiltCompiler)
+    implementation(libs.hilt.core)
+    kapt(libs.hilt.compiler)
 }

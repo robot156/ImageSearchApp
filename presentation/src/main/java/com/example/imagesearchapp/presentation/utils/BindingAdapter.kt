@@ -24,7 +24,7 @@ fun loadImage(view: ImageView, imageUrl: String?) {
 
         Glide.with(view.context)
             .load(imageUrl)
-            .placeholder(R.drawable.ic_placeholder)
+            .placeholder(R.color.color_light_gray)
             .error(R.drawable.ic_placeholder)
             .into(view)
     }

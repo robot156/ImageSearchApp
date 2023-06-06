@@ -1,9 +1,9 @@
-package com.example.imagesearchapp.initialize
+package com.example.imagesearchapp.presentation.initialize
 
 import android.content.Context
 import androidx.core.content.res.ResourcesCompat
 import androidx.startup.Initializer
-import com.example.imagesearchapp.R
+import com.example.imagesearchapp.presentation.R
 import es.dmoral.toasty.Toasty
 
 class ToastyInitializer : Initializer<Unit> {

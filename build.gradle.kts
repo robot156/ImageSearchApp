@@ -1,19 +1,10 @@
-buildscript {
-
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
-    }
-    dependencies {
-        classpath(Libraries.GradlePlugin.android)
-        classpath(Libraries.GradlePlugin.kotlin)
-        classpath(Libraries.GradlePlugin.kotlinSerializable)
-        classpath(Libraries.GradlePlugin.daggerHilt)
-        classpath(Libraries.GradlePlugin.safeArgs)
-    }
-}
-
-tasks.register("clean") {
-    delete(rootProject.buildDir)
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.androidx.navigation.safeArgs) apply false
 }

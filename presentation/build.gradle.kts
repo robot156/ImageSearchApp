@@ -8,6 +8,8 @@ plugins {
 }
 
 android {
+    namespace = "com.example.imagesearchapp.presentation"
+
     defaultConfig {
         minSdk = Config.minSdk
         targetSdk = Config.targetSdk
@@ -36,6 +38,13 @@ android {
     }
     kotlinOptions {
         jvmTarget = Config.javaCompileTarget.toString()
+        freeCompilerArgs = freeCompilerArgs + listOf(
+            "-opt-in=kotlin.RequiresOptIn",
+            // Enable experimental coroutines APIs, including Flow
+            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "-opt-in=kotlinx.coroutines.FlowPreview",
+            "-opt-in=kotlin.Experimental",
+        )
     }
 
     buildFeatures {
@@ -48,48 +57,44 @@ dependencies {
     implementation(project(":domain"))
 
     // AndroidX
-    implementation(Libraries.AndroidX.core)
-    implementation(Libraries.AndroidX.appcompat)
-    implementation(Libraries.AndroidX.design)
-    implementation(Libraries.AndroidX.constraint)
-    implementation(Libraries.AndroidX.activity)
-    implementation(Libraries.AndroidX.fragment)
-    implementation(Libraries.AndroidX.startUp)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.constraint)
+    implementation(libs.androidx.recyclerView)
+    implementation(libs.androidx.startup)
 
-    //Android Lifecycle
-    implementation(Libraries.AndroidX.Lifecycle.runtime)
-    implementation(Libraries.AndroidX.Lifecycle.viewModel)
-    implementation(Libraries.AndroidX.Lifecycle.savedState)
-    implementation(Libraries.AndroidX.Lifecycle.service)
-    kapt(Libraries.AndroidX.Lifecycle.compiler)
+    // Android Material
+    implementation(libs.android.material)
+
+    // AndroidX Lifecycle
+    implementation(libs.bundles.androidx.lifecycle)
+
     // AndroidX Paging
-    implementation(Libraries.AndroidX.Paging.runtime)
+    implementation(libs.androidx.paging.runtime)
     // AndroidX Navigation
-    implementation(Libraries.AndroidX.Navigation.ui)
-    implementation(Libraries.AndroidX.Navigation.fragment)
+    implementation(libs.bundles.androidx.navigation)
 
-    // Kotlin
-    implementation(Libraries.Kotlin.kotlin)
-    implementation(Libraries.Kotlin.coroutine)
+    // Kotlinx Coroutines
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.kotlin.stdlib)
 
     // Dagger2 ( DI )
-    implementation(Libraries.Dagger.androidHilt)
-    kapt(Libraries.Dagger.androidHiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
     // Dagger2 ( DI ) Android Support
-    implementation(Libraries.AndroidX.Hilt.common)
-    implementation(Libraries.AndroidX.Hilt.navigation)
-    kapt(Libraries.AndroidX.Hilt.compiler)
+    implementation(libs.androidx.hilt.common)
+    implementation(libs.androidx.hilt.navigation)
+    kapt(libs.androidx.hilt.compiler)
 
     // ETC
     // Java 8 Desugaring
-    coreLibraryDesugaring(Libraries.desugar)
+    coreLibraryDesugaring(libs.android.desugarJdkLibs)
     // Image loading library
-    implementation(Libraries.Glide.core)
-    kapt(Libraries.Glide.compiler)
+    implementation(libs.glide)
+    kapt(libs.glide)
     // Timber
-    api(Libraries.timber)
+    api(libs.timber)
     // Toasty
-    implementation(Libraries.toasty)
+    implementation(libs.toasty)
     // Easy Permission
-    implementation(Libraries.permission)
+    implementation(libs.easyPermission)
 }

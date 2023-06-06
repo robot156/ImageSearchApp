@@ -7,6 +7,8 @@ plugins {
 }
 
 android {
+    namespace = "com.example.imagesearchapp.data"
+
     defaultConfig {
         minSdk = Config.minSdk
         targetSdk = Config.targetSdk
@@ -38,26 +40,22 @@ dependencies {
     implementation(project(":domain"))
 
     // AndroidX Room
-    implementation(Libraries.AndroidX.Room.runtime)
-    implementation(Libraries.AndroidX.Room.coroutine)
-    implementation(Libraries.AndroidX.Room.paging)
-    kapt(Libraries.AndroidX.Room.compiler)
+    implementation(libs.bundles.androidx.room)
+    kapt(libs.androidx.room.compiler)
 
     // Retrofit2
-    implementation(Libraries.Retrofit2.core)
-    implementation(Libraries.Retrofit2.converterKotlin)
-    // logging interceptor
-    implementation(Libraries.OkHttp.logger)
+    implementation(libs.bundles.retrofit)
+
     // Kotlin
-    implementation(Libraries.Kotlin.kotlin)
-    implementation(Libraries.Kotlin.kotlinSerializable)
-    implementation(Libraries.Kotlin.coroutine)
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.coroutines)
 
     // Dagger2 ( DI )
-    implementation(Libraries.Dagger.androidHilt)
-    kapt(Libraries.Dagger.androidHiltCompiler)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
     // ETC
-    coreLibraryDesugaring(Libraries.desugar)
-    api(Libraries.timber)
+    coreLibraryDesugaring(libs.android.desugarJdkLibs)
+    api(libs.timber)
 }

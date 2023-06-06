@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.imagesearchapp"
 
     defaultConfig {
         applicationId = Config.applicationId
@@ -30,7 +31,6 @@ android {
         }
     }
     compileOptions {
-        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = Config.javaCompileTarget
         targetCompatibility = Config.javaCompileTarget
     }
@@ -47,20 +47,12 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    // AndroidX
+    implementation(libs.androidx.startup)
 
     // Dagger2 ( DI )
-    implementation(Libraries.Dagger.androidHilt)
-    kapt(Libraries.Dagger.androidHiltCompiler)
-    // Dagger2 ( DI ) Android Support
-    implementation(Libraries.AndroidX.Hilt.common)
-    kapt(Libraries.AndroidX.Hilt.compiler)
-    /** etc */
-    // CoreLibrary Desugar
-    coreLibraryDesugaring(Libraries.desugar)
-    // Toasty
-    implementation(Libraries.toasty)
-
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.common)
+    kapt(libs.androidx.hilt.compiler)
 }
