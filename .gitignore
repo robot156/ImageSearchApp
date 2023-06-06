@@ -9,6 +9,8 @@
 /.idea/assetWizardSettings.xml
 /.idea/compiler.xml
 /.idea/misc.xml
+/.idea/gradle.xml
+
 .DS_Store
 /build
 /buildSrc/build

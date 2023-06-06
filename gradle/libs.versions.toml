@@ -33,7 +33,7 @@ androidDesugarJdkLibs = "1.1.5"
 retrofit = "2.9.0"
 retrofitKotlinxSerializationJson = "1.0.0"
 okhttp = "4.9.3"
-glide = "4.13.2"
+glide = "4.14.2"
 timber = "5.0.1"
 easyPermission = "3.0.0"
 toasty = "1.5.2"
@@ -92,6 +92,7 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 toasty = { group = "com.github.GrenderG", name = "Toasty", version.ref = "toasty" }
 easyPermission = { group = "pub.devrel", name = "easypermissions", version.ref = "easyPermission" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "ksp", version.ref = "glide" }
 android-desugarJdkLibs = { group = "com.android.tools", name = "desugar_jdk_libs", version.ref = "androidDesugarJdkLibs" } # coreLibraryDesugaring
 
 # Dependencies of the included build-logic

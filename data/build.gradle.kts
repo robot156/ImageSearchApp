@@ -1,18 +1,20 @@
+import com.imagesearch.convention.ImageSearchConfig
+
 plugins {
-    id("com.android.library")
-    kotlin("android")
-    kotlin("kapt")
+    id("imagesearch.android.library")
+    id("imagesearch.android.hilt")
     id("kotlinx-serialization")
-    id("dagger.hilt.android.plugin")
+
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.example.imagesearchapp.data"
 
     defaultConfig {
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        compileSdk = Config.compileSdk
+        minSdk = ImageSearchConfig.minSdk
+        targetSdk = ImageSearchConfig.targetSdk
+        compileSdk = ImageSearchConfig.compileSdk
     }
 
     buildTypes {
@@ -26,14 +28,6 @@ android {
             buildConfigField("String", "UNSPALSH_API_KEY", properties["UNSPALSH_API_KEY"] as String)
         }
     }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = Config.javaCompileTarget
-        targetCompatibility = Config.javaCompileTarget
-    }
-    kotlinOptions {
-        jvmTarget = Config.javaCompileTarget.toString()
-    }
 }
 
 dependencies {
@@ -41,7 +35,7 @@ dependencies {
 
     // AndroidX Room
     implementation(libs.bundles.androidx.room)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     // Retrofit2
     implementation(libs.bundles.retrofit)
@@ -51,11 +45,6 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.coroutines)
 
-    // Dagger2 ( DI )
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-
     // ETC
-    coreLibraryDesugaring(libs.android.desugarJdkLibs)
     api(libs.timber)
 }

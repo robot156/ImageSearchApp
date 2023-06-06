@@ -1,11 +1,6 @@
 plugins {
-    kotlin("jvm")
-    kotlin("kapt")
-}
-
-java {
-    sourceCompatibility = Config.javaCompileTarget
-    targetCompatibility = Config.javaCompileTarget
+    id("imagesearch.jvm.library")
+    id("imagesearch.jvm.hilt")
 }
 
 dependencies {
@@ -15,8 +10,4 @@ dependencies {
 
     // Paging
     implementation(libs.androidx.paging.common)
-
-    // Dagger2 ( DI )
-    implementation(libs.hilt.core)
-    kapt(libs.hilt.compiler)
 }

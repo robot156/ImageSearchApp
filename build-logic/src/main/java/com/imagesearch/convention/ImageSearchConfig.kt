@@ -1,6 +1,10 @@
+package com.imagesearch.convention
+
 import org.gradle.api.JavaVersion
 
-object Config {
+@Suppress("unused")
+object ImageSearchConfig {
+
     const val applicationId = "com.example.imagesearchapp"
 
     const val minSdk = 21

@@ -1,19 +1,21 @@
+import com.imagesearch.convention.ImageSearchConfig
+
 plugins {
-    id("com.android.library")
+    id("imagesearch.android.library")
+    id("imagesearch.android.hilt")
     id("kotlin-parcelize")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
     id("androidx.navigation.safeargs.kotlin")
+
+    id("com.google.devtools.ksp")
 }
 
 android {
     namespace = "com.example.imagesearchapp.presentation"
 
     defaultConfig {
-        minSdk = Config.minSdk
-        targetSdk = Config.targetSdk
-        compileSdk = Config.compileSdk
+        minSdk = ImageSearchConfig.minSdk
+        targetSdk = ImageSearchConfig.targetSdk
+        compileSdk = ImageSearchConfig.compileSdk
 
         vectorDrawables {
             useSupportLibrary = true
@@ -30,21 +32,6 @@ android {
         debug {
             buildConfigField("String", "UNSPALSH_API_KEY", properties["UNSPALSH_API_KEY"] as String)
         }
-    }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = Config.javaCompileTarget
-        targetCompatibility = Config.javaCompileTarget
-    }
-    kotlinOptions {
-        jvmTarget = Config.javaCompileTarget.toString()
-        freeCompilerArgs = freeCompilerArgs + listOf(
-            "-opt-in=kotlin.RequiresOptIn",
-            // Enable experimental coroutines APIs, including Flow
-            "-opt-in=kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "-opt-in=kotlinx.coroutines.FlowPreview",
-            "-opt-in=kotlin.Experimental",
-        )
     }
 
     buildFeatures {
@@ -77,20 +64,13 @@ dependencies {
     implementation(libs.kotlinx.coroutines)
     implementation(libs.kotlin.stdlib)
 
-    // Dagger2 ( DI )
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
     // Dagger2 ( DI ) Android Support
     implementation(libs.androidx.hilt.common)
     implementation(libs.androidx.hilt.navigation)
-    kapt(libs.androidx.hilt.compiler)
 
-    // ETC
-    // Java 8 Desugaring
-    coreLibraryDesugaring(libs.android.desugarJdkLibs)
     // Image loading library
     implementation(libs.glide)
-    kapt(libs.glide)
+    ksp(libs.glide.compiler)
     // Timber
     api(libs.timber)
     // Toasty
