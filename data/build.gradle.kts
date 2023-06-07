@@ -1,5 +1,3 @@
-import com.imagesearch.convention.ImageSearchConfig
-
 plugins {
     id("imagesearch.android.library")
     id("imagesearch.android.hilt")
@@ -10,12 +8,6 @@ plugins {
 
 android {
     namespace = "com.example.imagesearchapp.data"
-
-    defaultConfig {
-        minSdk = ImageSearchConfig.minSdk
-        targetSdk = ImageSearchConfig.targetSdk
-        compileSdk = ImageSearchConfig.compileSdk
-    }
 
     buildTypes {
         release {

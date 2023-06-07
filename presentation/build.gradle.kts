@@ -1,5 +1,3 @@
-import com.imagesearch.convention.ImageSearchConfig
-
 plugins {
     id("imagesearch.android.library")
     id("imagesearch.android.hilt")
@@ -10,13 +8,8 @@ plugins {
 }
 
 android {
-    namespace = "com.example.imagesearchapp.presentation"
-
     defaultConfig {
-        minSdk = ImageSearchConfig.minSdk
-        targetSdk = ImageSearchConfig.targetSdk
-        compileSdk = ImageSearchConfig.compileSdk
-
+        namespace = "com.example.imagesearchapp.presentation"
         vectorDrawables {
             useSupportLibrary = true
         }

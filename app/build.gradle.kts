@@ -10,13 +10,8 @@ android {
 
     defaultConfig {
         applicationId = ImageSearchConfig.applicationId
-        minSdk = ImageSearchConfig.minSdk
-        targetSdk = ImageSearchConfig.targetSdk
-        compileSdk = ImageSearchConfig.compileSdk
         versionCode = ImageSearchConfig.versionCode
         versionName = ImageSearchConfig.versionName
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
