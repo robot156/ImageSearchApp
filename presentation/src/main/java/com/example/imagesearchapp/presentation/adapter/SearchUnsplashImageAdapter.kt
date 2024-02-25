@@ -9,7 +9,7 @@ import com.example.imagesearchapp.presentation.R
 import com.example.imagesearchapp.presentation.adapter.viewholder.SearchUnsplashImageViewHolder
 import com.example.imagesearchapp.presentation.databinding.ItemSearchUnsplashImageBinding
 import com.example.imagesearchapp.presentation.model.UnsplashImageItem
-import com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchListViewModel
+import com.example.imagesearchapp.presentation.screen.imagesearchlist.ImageSearchListViewModel
 import com.example.imagesearchapp.presentation.utils.executeAfter
 
 class SearchUnsplashImageAdapter(

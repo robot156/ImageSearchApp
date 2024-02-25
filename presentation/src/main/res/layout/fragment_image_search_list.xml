@@ -21,14 +21,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchListViewModel" />
+            type="com.example.imagesearchapp.presentation.screen.imagesearchlist.ImageSearchListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:theme="@style/Theme.ImageSearchApp.Search"
-        tools:context=".screen.imagesearch.ImageSearchListFragment">
+        tools:context=".screen.imagesearchlist.ImageSearchListFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:text="@{viewModel.keyword}"
-                    android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+                    android:textAppearance="@style/TextAppearance.imageSearch.HeadLine1"
                     android:textColor="@android:color/white"
                     tools:text="doge" />
             </androidx.appcompat.widget.Toolbar>
@@ -79,14 +79,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_keyword"
-                    style="@style/Widget.Custom.TextInputLayoutStyle"
+                    style="@style/Widget.ImageSearch.TextInputLayoutStyle"
                     android:layout_width="match_parent"
-                    app:endIconTint="?colorOnPrimarySurface"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    app:endIconTint="?colorOnPrimarySurface">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/tiet_keyword"
-                        style="@style/TextAppearance.imgSearch.Body1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:ellipsize="end"
@@ -96,6 +95,7 @@
                         android:maxLines="1"
                         android:padding="16dp"
                         android:text="@{viewModel.keyword}"
+                        android:textAppearance="@style/TextAppearance.imageSearch.Body1"
                         android:textColor="?colorOnSecondary" />
                 </com.google.android.material.textfield.TextInputLayout>
             </FrameLayout>
@@ -126,8 +126,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/list_error"
+            android:textAppearance="@style/TextAppearance.imageSearch.HeadLine2"
             android:textColor="?colorOnSecondary"
-            android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
             android:visibility="@{isError ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -137,7 +137,7 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_retry"
-            style="@style/Widget.Custom.Button"
+            style="@style/Widget.ImageSearch.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -200,7 +200,7 @@
                 android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:text="@string/list_empty_result"
-                android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
+                android:textAppearance="@style/TextAppearance.imageSearch.HeadLine2"
                 android:textColor="?colorOnSecondary"
                 app:layout_constraintBottom_toTopOf="@id/btn_back"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -209,7 +209,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_back"
-                style="@style/Widget.Custom.Button"
+                style="@style/Widget.ImageSearch.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"

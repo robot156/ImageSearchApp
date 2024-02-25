@@ -1,4 +1,4 @@
-package com.example.imagesearchapp.presentation.screen.imagesearch
+package com.example.imagesearchapp.presentation.screen.imagesearchlist
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
+import com.example.imagesearchapp.domain.usecase.unsplashimage.entity.UnsplashImageEntity
 import com.example.imagesearchapp.domain.usecase.unsplashimage.imagesearch.GetSearchUnsplashImagesUseCase
 import com.example.imagesearchapp.domain.utils.data
 import com.example.imagesearchapp.presentation.model.UnsplashImageItem
@@ -14,7 +15,16 @@ import com.example.imagesearchapp.presentation.utils.Const.EVENT_EXTRA_BUFFER
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.merge
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,12 +40,7 @@ class ImageSearchListViewModel @Inject constructor(
 
     val images: Flow<PagingData<UnsplashImageItem>> = merge(
         clearListCh.receiveAsFlow().map { PagingData.empty() },
-        keyword.filterNotNull().flatMapLatest { keyword ->
-            getSearchUnsplashImagesUseCase(GetSearchUnsplashImagesUseCase.Params(query = keyword))
-                .map { result ->
-                    result.data!!.map { data -> data.mapToItem() }
-                }
-        }
+        keyword.filterNotNull().flatMapLatest { keyword -> getSearchUnsplashImagesUseCase(GetSearchUnsplashImagesUseCase.Params(query = keyword)).map { result -> result.data!!.map(UnsplashImageEntity::mapToItem) } }
     ).cachedIn(viewModelScope)
 
     private val _isSearchMenuVisible = MutableStateFlow<Boolean>(false)

@@ -12,7 +12,7 @@ class ToastyInitializer : Initializer<Unit> {
         Toasty.Config.getInstance()
             .setTextSize(14)
             .apply {
-                ResourcesCompat.getFont(context, R.font.font_demi_light)?.let {
+                ResourcesCompat.getFont(context, R.font.font_regular)?.let {
                     setToastTypeface(it)
                 }
             }

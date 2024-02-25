@@ -1,33 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextAppearance.imgSearch" parent="TextAppearance.AppCompat" />
+    <style name="TextAppearance.imageSearch" parent="TextAppearance.AppCompat" />
 
-    <style name="TextAppearance.imgSearch.HeadLine1">
+    <style name="TextAppearance.imageSearch.HeadLine1">
         <item name="android:fontFamily">@font/font_bold</item>
         <item name="fontFamily">@font/font_bold</item>
         <item name="android:textSize">20dp</item>
     </style>
 
-    <style name="TextAppearance.imgSearch.HeadLine2">
+    <style name="TextAppearance.imageSearch.HeadLine2">
         <item name="android:fontFamily">@font/font_regular</item>
         <item name="fontFamily">@font/font_regular</item>
         <item name="android:textSize">18dp</item>
     </style>
 
-    <style name="TextAppearance.imgSearch.Body0">
-        <item name="android:fontFamily">@font/font_demi_light</item>
-        <item name="fontFamily">@font/font_demi_light</item>
-        <item name="android:textSize">18dp</item>
-    </style>
-
-    <style name="TextAppearance.imgSearch.Body1">
-        <item name="android:fontFamily">@font/font_demi_light</item>
-        <item name="fontFamily">@font/font_demi_light</item>
+    <style name="TextAppearance.imageSearch.Body1">
+        <item name="android:fontFamily">@font/font_regular</item>
+        <item name="fontFamily">@font/font_regular</item>
         <item name="android:textSize">16dp</item>
     </style>
 
-    <style name="Widget.Custom.Button" parent="Widget.MaterialComponents.Button">
+    <style name="Widget.ImageSearch.Button" parent="Widget.MaterialComponents.Button">
         <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
         <item name="backgroundTint">@color/selected_button</item>
         <item name="elevation">0dp</item>
@@ -37,19 +31,19 @@
         <item name="android:insetTop">0dp</item>
         <item name="android:paddingTop">0dp</item>
         <item name="android:paddingBottom">0dp</item>
-        <item name="android:textAppearance">@style/TextAppearance.imgSearch.HeadLine2</item>
+        <item name="android:textAppearance">@style/TextAppearance.imageSearch.HeadLine2</item>
         <item name="android:textColor">@color/selected_button_text</item>
         <item name="android:stateListAnimator">@null</item>
     </style>
 
-    <style name="Widget.Custom.IconButton" parent="Widget.Material3.Button.IconButton">
+    <style name="Widget.ImageSearch.IconButton" parent="Widget.Material3.Button.IconButton">
         <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
         <item name="android:minWidth">0dp</item>
         <item name="backgroundTint">?colorOnPrimary</item>
         <item name="iconTint">@color/colorPrimary</item>
     </style>
 
-    <style name="Widget.Custom.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="Widget.ImageSearch.TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
         <item name="shapeAppearance">@style/ShapeAppearance.LargeComponent</item>
         <item name="boxStrokeColor">@color/color_light_pink</item>
         <item name="boxStrokeWidth">1dp</item>

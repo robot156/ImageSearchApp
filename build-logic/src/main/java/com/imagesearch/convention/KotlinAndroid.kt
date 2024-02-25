@@ -2,23 +2,20 @@ package com.imagesearch.convention
 
 import com.android.build.api.dsl.CommonExtension
 import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *>,
+    commonExtension: CommonExtension<*, *, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk = ImageSearchConfig.compileSdk
-
         defaultConfig {
             minSdk = ImageSearchConfig.minSdk
+            compileSdk = ImageSearchConfig.compileSdk
         }
 
         compileOptions {
@@ -26,14 +23,16 @@ internal fun Project.configureKotlinAndroid(
             targetCompatibility = ImageSearchConfig.javaCompileTarget
             isCoreLibraryDesugaringEnabled = true
         }
+
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     configureKotlin()
 
-    val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
-
     dependencies {
-        add("coreLibraryDesugaring", libs.findLibrary("android.desugarJdkLibs").get())
+        coreLibraryDesugaring(libs.android.desugarJdkLibs)
     }
 }
 

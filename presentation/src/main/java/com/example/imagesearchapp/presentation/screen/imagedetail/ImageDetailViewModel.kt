@@ -5,7 +5,7 @@ import com.example.imagesearchapp.domain.usecase.file.SaveImageFileUseCase
 import com.example.imagesearchapp.domain.usecase.unsplashimage.imagekeep.DeleteKeepUnsplashImageUseCase
 import com.example.imagesearchapp.domain.usecase.unsplashimage.imagekeep.GetKeepUnsplashImageUseCase
 import com.example.imagesearchapp.domain.usecase.unsplashimage.imagekeep.SaveKeepUnsplashImageUseCase
-import com.example.imagesearchapp.domain.utils.ResultState
+import com.example.imagesearchapp.domain.utils.ApiResult
 import com.example.imagesearchapp.domain.utils.data
 import com.example.imagesearchapp.presentation.model.UnsplashImageItem
 import com.example.imagesearchapp.presentation.model.mapToEntity
@@ -83,9 +83,9 @@ class ImageDetailViewModel @Inject constructor(
                 )
             ).collect {
                 when (it) {
-                    is ResultState.Loading -> return@collect
-                    is ResultState.Success -> _saveComplete.emit(Unit)
-                    is ResultState.Error -> _saveFail.emit(Unit)
+                    is ApiResult.Loading -> return@collect
+                    is ApiResult.Success -> _saveComplete.emit(Unit)
+                    is ApiResult.Error -> _saveFail.emit(Unit)
                 }
             }
         }

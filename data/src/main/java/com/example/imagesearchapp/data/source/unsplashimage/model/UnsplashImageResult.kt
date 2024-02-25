@@ -36,9 +36,5 @@ internal data class UnsplashImageResult(
         val name: String,
         @SerialName("username")
         val username: String
-    ) : Model {
-        @SerialName("attributionUrl")
-        val attributionUrl
-            get() = "https://unsplash.com/$username?utm_source=ImageSearchApp&utm_medium=referral"
-    }
+    ) : Model
 }

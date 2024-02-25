@@ -3,7 +3,7 @@ package com.example.imagesearchapp.data.source.unsplashimage
 import androidx.paging.PagingData
 import com.example.imagesearchapp.domain.usecase.unsplashimage.UnsplashImageRepository
 import com.example.imagesearchapp.domain.usecase.unsplashimage.entity.UnsplashImageEntity
-import com.example.imagesearchapp.domain.utils.ResultState
+import com.example.imagesearchapp.domain.utils.ApiResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -17,8 +17,8 @@ class UnsplashImageRepositoryImpl @Inject constructor(
         return unsplashImageRemoteDataSource.getSearchUnsplashImages(query, page, limit)
     }
 
-    override fun getKeepUnsplashImages(): Flow<ResultState<PagingData<UnsplashImageEntity>>> {
-        return unsplashImageLocalDataSource.getKeepUnsplashImages().map { ResultState.Success(it) }
+    override fun getKeepUnsplashImages(): Flow<ApiResult<PagingData<UnsplashImageEntity>>> {
+        return unsplashImageLocalDataSource.getKeepUnsplashImages().map { ApiResult.Success(it) }
     }
 
     override suspend fun setKeepUnsplashImage(unsplashImageItem: UnsplashImageEntity) {

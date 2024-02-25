@@ -1,4 +1,4 @@
-package com.example.imagesearchapp.presentation.screen.imagesearch
+package com.example.imagesearchapp.presentation.screen.imagesearchlist
 
 import android.os.Bundle
 import android.view.View

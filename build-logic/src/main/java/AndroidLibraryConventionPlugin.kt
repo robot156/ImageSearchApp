@@ -1,5 +1,6 @@
 import com.android.build.gradle.LibraryExtension
 import com.imagesearch.convention.ImageSearchConfig
+import com.imagesearch.convention.Plugins
 import com.imagesearch.convention.configureKotlinAndroid
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -9,8 +10,8 @@ internal class AndroidLibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                apply("com.android.library")
-                apply("org.jetbrains.kotlin.android")
+                apply(Plugins.AndroidLibrary)
+                apply(Plugins.KotlinAndroid)
             }
 
             extensions.configure<LibraryExtension> {

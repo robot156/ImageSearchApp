@@ -36,7 +36,7 @@
 
     <fragment
         android:id="@+id/imageSearchListFragment"
-        android:name="com.example.imagesearchapp.presentation.screen.imagesearch.ImageSearchListFragment"
+        android:name="com.example.imagesearchapp.presentation.screen.imagesearchlist.ImageSearchListFragment"
         android:label="ImageSearchListFragment"
         tools:layout="@layout/fragment_image_search_list">
 

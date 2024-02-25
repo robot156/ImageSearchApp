@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ImageKeepViewModel @Inject constructor(
-    private val getKeepUnsplashImagesUseCase: GetKeepUnsplashImagesUseCase
+    getKeepUnsplashImagesUseCase: GetKeepUnsplashImagesUseCase
 ) : ViewModel() {
 
     val keepImages = getKeepUnsplashImagesUseCase(Unit)

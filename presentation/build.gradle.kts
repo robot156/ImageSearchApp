@@ -8,22 +8,11 @@ plugins {
 }
 
 android {
-    defaultConfig {
-        namespace = "com.example.imagesearchapp.presentation"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
+    namespace = "com.example.imagesearchapp.presentation"
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-            proguardFile("proguard-rules.pro")
-            buildConfigField("String", "UNSPALSH_API_KEY", properties["UNSPALSH_API_KEY"] as String)
-        }
-        debug {
-            buildConfigField("String", "UNSPALSH_API_KEY", properties["UNSPALSH_API_KEY"] as String)
         }
     }
 

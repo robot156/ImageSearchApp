@@ -51,7 +51,7 @@
                     android:layout_gravity="end"
                     android:layout_marginHorizontal="30dp"
                     android:text="@string/image_keep_title"
-                    android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+                    android:textAppearance="@style/TextAppearance.imageSearch.HeadLine1"
                     android:textColor="@android:color/white" />
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
@@ -123,7 +123,7 @@
                 android:layout_marginTop="24dp"
                 android:gravity="center"
                 android:text="@string/image_keep_empty"
-                android:textAppearance="@style/TextAppearance.imgSearch.HeadLine2"
+                android:textAppearance="@style/TextAppearance.imageSearch.HeadLine2"
                 android:textColor="?colorOnSecondary"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -31,7 +31,7 @@
             android:maxLines="1"
             android:padding="6dp"
             android:text="@{keyword}"
-            android:textAppearance="@style/TextAppearance.imgSearch.HeadLine1"
+            android:textAppearance="@style/TextAppearance.imageSearch.HeadLine1"
             android:textColor="?colorOnSecondary"
             tools:textColor="@android:color/black"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -5,7 +5,7 @@ import com.example.imagesearchapp.domain.di.IoDispatcher
 import com.example.imagesearchapp.domain.usecase.FlowUseCase
 import com.example.imagesearchapp.domain.usecase.unsplashimage.UnsplashImageRepository
 import com.example.imagesearchapp.domain.usecase.unsplashimage.entity.UnsplashImageEntity
-import com.example.imagesearchapp.domain.utils.ResultState
+import com.example.imagesearchapp.domain.utils.ApiResult
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -16,7 +16,7 @@ open class GetSearchUnsplashImagesUseCase @Inject constructor(
     @IoDispatcher ioDispatcher: CoroutineDispatcher
 ) : FlowUseCase<GetSearchUnsplashImagesUseCase.Params, PagingData<UnsplashImageEntity>>(ioDispatcher) {
 
-    override fun execute(params: Params): Flow<ResultState<PagingData<UnsplashImageEntity>>> = Pager(
+    override fun execute(params: Params): Flow<ApiResult<PagingData<UnsplashImageEntity>>> = Pager(
         config = PagingConfig(pageSize = SEARCH_PAGE_SIZE, enablePlaceholders = true)
     ) {
         object : PagingSource<Int, UnsplashImageEntity>() {
@@ -41,7 +41,7 @@ open class GetSearchUnsplashImagesUseCase @Inject constructor(
                 }
             }
         }
-    }.flow.map { ResultState.Success(it) }
+    }.flow.map { ApiResult.Success(it) }
 
     data class Params(
         val query: String,
