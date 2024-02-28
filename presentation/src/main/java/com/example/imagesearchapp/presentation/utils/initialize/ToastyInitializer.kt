@@ -1,4 +1,4 @@
-package com.example.imagesearchapp.presentation.initialize
+package com.example.imagesearchapp.presentation.utils.initialize
 
 import android.content.Context
 import androidx.core.content.res.ResourcesCompat

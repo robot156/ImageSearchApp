@@ -22,7 +22,7 @@
             tools:node="merge">
 
             <meta-data
-                android:name="com.example.imagesearchapp.presentation.initialize.ToastyInitializer"
+                android:name="com.example.imagesearchapp.presentation.utils.initialize.ToastyInitializer"
                 android:value="androidx.startup" />
         </provider>
     </application>

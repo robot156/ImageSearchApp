@@ -16,9 +16,19 @@ gradlePlugin {
             implementationClass = "AndroidApplicationConventionPlugin"
         }
 
+        register("androidApplicationCompose") {
+            id = "imagesearch.android.application.compose"
+            implementationClass = "AndroidApplicationComposeConventionPlugin"
+        }
+
         register("androidLibrary") {
             id = "imagesearch.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
+        }
+
+        register("androidLibraryCompose") {
+            id = "imagesearch.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
 
         register("androidHilt") {

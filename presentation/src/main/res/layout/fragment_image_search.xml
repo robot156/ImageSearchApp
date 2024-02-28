@@ -79,7 +79,7 @@
                         android:id="@+id/tiet_keyword"
                         style="@style/TextAppearance.imageSearch.Body1"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="61dp"
                         android:hint="@string/search_hint"
                         android:imeOptions="actionDone"
                         android:inputType="text"
