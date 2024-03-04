@@ -17,7 +17,7 @@ val PretendardFontFamily = FontFamily(
 )
 
 val Typography = Typography(
-    // Display Large - Montserrat 57/64 . -0.25px
+    // Display Large
     displayLarge = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -26,7 +26,7 @@ val Typography = Typography(
         letterSpacing = (-0.25).sp,
     ),
 
-    // Display Medium - Montserrat 45/52 . 0px
+    // Display Medium
     displayMedium = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -35,7 +35,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Display Small - Montserrat 36/44 . 0px
+    // Display Small
     displaySmall = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -44,7 +44,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Headline Large - Montserrat 32/40 . 0px
+    // Headline Large
     headlineLarge = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -53,7 +53,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Headline Medium - Montserrat 28/36 . 0px
+    // Headline Medium
     headlineMedium = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -62,7 +62,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Headline Small - Montserrat 24/32 . 0px
+    // Headline Small
     headlineSmall = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -71,7 +71,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Title Large - Montserrat 22/28 . 0px
+    // Title Large
     titleLarge = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -80,7 +80,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
     ),
 
-    // Title Medium - Montserrat 16/24 . 0.15px
+    // Title Medium
     titleMedium = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W500,
@@ -89,7 +89,7 @@ val Typography = Typography(
         letterSpacing = 0.15.sp,
     ),
 
-    // Title Small - Montserrat 14/20 . 0.1px
+    // Title Small
     titleSmall = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W500,
@@ -98,7 +98,7 @@ val Typography = Typography(
         letterSpacing = 0.1.sp,
     ),
 
-    // Label Large - Montserrat 14/20 . 0.1px
+    // Label Large
     labelLarge = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W500,
@@ -107,7 +107,7 @@ val Typography = Typography(
         letterSpacing = 0.1.sp,
     ),
 
-    // Label Medium - Montserrat 12/16 . 0.5px
+    // Label Medium
     labelMedium = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W500,
@@ -116,7 +116,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp,
     ),
 
-    // Label Small - Montserrat 11/16 . 0.5px
+    // Label Small
     labelSmall = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W500,
@@ -125,7 +125,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp,
     ),
 
-    // Body Large - Montserrat 16/24 . 0.5px
+    // Body Large
     bodyLarge = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -134,7 +134,7 @@ val Typography = Typography(
         letterSpacing = 0.5.sp,
     ),
 
-    // Body Medium - Montserrat 14/20 . 0.25px
+    // Body Medium
     bodyMedium = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,
@@ -142,7 +142,7 @@ val Typography = Typography(
         lineHeight = 20.sp,
         letterSpacing = 0.25.sp,
     ),
-    // Body Small - Montserrat 12/16 . 0.4px
+    // Body Small
     bodySmall = TextStyle(
         fontFamily = PretendardFontFamily,
         fontWeight = FontWeight.W400,

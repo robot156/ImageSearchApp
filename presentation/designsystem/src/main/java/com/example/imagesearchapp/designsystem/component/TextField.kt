@@ -15,7 +15,9 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -29,22 +31,23 @@ fun SearchTextField(
     modifier: Modifier = Modifier,
     hintText: String,
     textState: TextFieldState = remember { TextFieldState() },
+    onSearchQueryChanged: (String) -> Unit,
     imeAction: ImeAction = ImeAction.Search,
-    onImeAction: () -> Unit = {}
+    focusManager: FocusManager = LocalFocusManager.current
 ) {
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-            .onFocusChanged { focusState ->
-                textState.onFocusChange(focusState.isFocused)
-                if (!focusState.isFocused) {
-                    textState.enableShowErrors()
-                }
-            },
+            .onFocusChanged { focusState -> textState.onFocusChange(focusState.isFocused) },
         colors = TextFieldDefaults.colors(
+            focusedTextColor = MaterialTheme.colorScheme.onSecondary,
+            unfocusedTextColor = MaterialTheme.colorScheme.onSecondary,
+
             unfocusedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
-            focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
-            unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary
+            focusedIndicatorColor = MaterialTheme.colorScheme.primaryContainer,
+
+            focusedContainerColor = MaterialTheme.colorScheme.background,
+            unfocusedContainerColor = MaterialTheme.colorScheme.background,
         ),
         leadingIcon = {
             Icon(
@@ -54,10 +57,7 @@ fun SearchTextField(
             )
         },
         value = textState.text,
-        onValueChange = {
-            textState.text = it
-            textState.enableShowErrors()
-        },
+        onValueChange = { textState.text = it },
         label = {
             Text(
                 text = hintText,
@@ -66,14 +66,16 @@ fun SearchTextField(
             )
         },
         textStyle = MaterialTheme.typography.bodyMedium,
-        isError = textState.showErrors(),
         keyboardOptions = KeyboardOptions.Default.copy(
             imeAction = imeAction,
             keyboardType = KeyboardType.Text
         ),
         shape = Shapes.extraLarge,
         keyboardActions = KeyboardActions(
-            onDone = { onImeAction() }
+            onSearch = {
+                onSearchQueryChanged(textState.text)
+                focusManager.clearFocus()
+            }
         ),
         maxLines = 1,
         singleLine = true,
@@ -83,14 +85,15 @@ fun SearchTextField(
 @Preview(name = "light theme", uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(name = "dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun SearchTextField() {
+private fun SearchTextFieldPreview() {
     ImageSearchTheme {
         SearchTextField(
             hintText = "찾으시는 이미지를 검색해보세요.",
             textState = TextFieldState(
                 validator = { false },
                 errorFor = { "false " }
-            )
+            ),
+            onSearchQueryChanged = {}
         )
     }
 }

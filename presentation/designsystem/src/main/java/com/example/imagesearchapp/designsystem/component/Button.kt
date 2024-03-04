@@ -1,10 +1,12 @@
 package com.example.imagesearchapp.designsystem.component
 
 import android.content.res.Configuration
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
@@ -12,9 +14,11 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.imagesearchapp.designsystem.theme.ImageSearchTheme
+import com.example.imagesearchapp.designsystem.theme.gray
+import com.example.imagesearchapp.designsystem.theme.white
 
 @Composable
 fun ImageSearchPrimaryButton(
@@ -30,7 +34,9 @@ fun ImageSearchPrimaryButton(
         enabled = enabled,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            contentColor = Color.White
+            disabledContainerColor = MaterialTheme.colorScheme.onSurface,
+            disabledContentColor = gray,
+            contentColor = white
         ),
         contentPadding = contentPadding,
         content = content,
@@ -48,7 +54,7 @@ fun ImageSearchOutlineButton(
         modifier = modifier,
         content = content,
         colors = ButtonDefaults.buttonColors().copy(
-            containerColor = MaterialTheme.colorScheme.surface,
+            containerColor = MaterialTheme.colorScheme.background,
             contentColor = MaterialTheme.colorScheme.onSecondary
         ),
     )
@@ -57,9 +63,12 @@ fun ImageSearchOutlineButton(
 @Preview(name = "light theme", uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(name = "dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-private fun ImageSearchOutlineButtonPreview() {
+private fun ImageSearchButtonPreview() {
     ImageSearchTheme {
-        Column {
+        Column(
+            modifier = Modifier.padding(6.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
             ImageSearchPrimaryButton(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {},
@@ -71,6 +80,16 @@ private fun ImageSearchOutlineButtonPreview() {
                 )
             }
 
+            ImageSearchPrimaryButton(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {},
+                enabled = false
+            ) {
+                Text(
+                    text = "검색",
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
 
             ImageSearchOutlineButton(
                 modifier = Modifier.fillMaxWidth(),

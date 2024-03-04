@@ -146,6 +146,7 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 
 [bundles]
 androidx-lifecycle = ["androidx-lifecycle-runtime", "androidx-lifecycle-viewModel", "androidx-lifecycle-liveData", "androidx-lifecycle-savedState"]
+androidx-lifecycle-compose = ["androidx-lifecycle-runtime-compose", "androidx-lifecycle-viewModel-compose"]
 androidx-room = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-room-paging"]
 androidx-navigation = ["androidx-navigation-ui", "androidx-navigation-fragment"]
 retrofit = ["retrofit-core", "retrofit-kotlin-serialization", "okhttp-logging"]
